@@ -1,3 +1,1 @@
-public class UserRepositoryTest {
-    
-}
+package test.java.com.JavaSpring.Bank.repository;

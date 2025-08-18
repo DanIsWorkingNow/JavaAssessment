@@ -1,3 +1,1 @@
-public class UserServiceTest {
-    
-}
+package test.java.com.JavaSpring.Bank.service;
