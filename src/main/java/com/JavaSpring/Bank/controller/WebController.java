@@ -1,4 +1,4 @@
-package com.JavaSpring.Bank.controller;
+package main.java.com.JavaSpring.Bank.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

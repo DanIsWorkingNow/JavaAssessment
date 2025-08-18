@@ -1,4 +1,4 @@
-package com.JavaSpring.Bank.service;
+package main.java.com.JavaSpring.Bank.service;
 
 import com.JavaSpring.Bank.dto.request.UserRequestDTO;
 import com.JavaSpring.Bank.dto.response.UserResponseDTO;

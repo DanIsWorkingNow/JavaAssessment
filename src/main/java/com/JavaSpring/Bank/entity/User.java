@@ -1,4 +1,4 @@
-package com.JavaSpring.Bank.entity;
+package main.java.com.JavaSpring.Bank.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
