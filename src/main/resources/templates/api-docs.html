@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">API Documentation</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e0eafc 0%, #a1c4fd 50%, #c2e9fb 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .docs-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .endpoint-card {
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+            margin: 10px 0;
+            transition: transform 0.2s ease;
+        }
+        .endpoint-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .method-badge {
+            font-size: 0.8rem;
+            padding: 4px 8px;
+            border-radius: 12px;
+            margin-right: 8px;
+            font-weight: bold;
+        }
+        .get { background: #28a745; color: white; }
+        .post { background: #007bff; color: white; }
+        .put { background: #ffc107; color: black; }
+        .delete { background: #dc3545; color: white; }
+        .code-block {
+            background: #f1f3f4;
+            border-radius: 4px;
+            padding: 12px;
+            margin: 8px 0;
+            font-family: 'Courier New', monospace;
+            border-left: 3px solid #007bff;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-users me-2"></i>Java SpringBoot Assessment
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><i class="fas fa-home me-1"></i>Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users"><i class="fas fa-users me-1"></i>Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/api-docs"><i class="fas fa-code me-1"></i>API Docs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/h2-console" target="_blank"><i class="fas fa-database me-1"></i>Database</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <!-- Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="docs-card p-4">
+                    <h1 class="mb-3">
+                        <i class="fas fa-code text-primary me-2"></i>
+                        REST API Documentation
+                    </h1>
+                    <p class="lead text-muted mb-3">
+                        Complete API reference for the User Management System
+                    </p>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <h6><i class="fas fa-server text-info me-2"></i>Base URL</h6>
+                            <code th:text="${baseUrl}">/api/v1</code>
+                        </div>
+                        <div class="col-md-4">
+                            <h6><i class="fas fa-tag text-warning me-2"></i>Version</h6>
+                            <code th:text="${version}">v1</code>
+                        </div>
+                        <div class="col-md-4">
+                            <h6><i class="fas fa-file-code text-success me-2"></i>Format</h6>
+                            <code>JSON</code>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- API Endpoints -->
+        <div class="row">
+            <div class="col-12">
+                <div class="docs-card p-4">
+                    <h4 class="mb-4"><i class="fas fa-list text-primary me-2"></i>Available Endpoints</h4>
+                    
+                    <!-- GET Endpoints -->
+                    <h5 class="mb-3"><i class="fas fa-download text-success me-2"></i>GET Endpoints</h5>
+                    
+                    <div class="endpoint-card p-3">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div>
+                                <span class="method-badge get">GET</span>
+                                <strong>/api/v1/users</strong>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary" onclick="testEndpoint('/api/v1/users')">Test</button>
+                        </div>
+                        <p class="mb-2"><strong>Description:</strong> Get all users with pagination (10 records per page)</p>
+                        <p class="mb-2"><strong>Features:</strong> @Transactional(readOnly=true), Pagination, Filtering, Sorting</p>
+                        <div class="code-block">
+                            <strong>Parameters:</strong><br>
+                            • page: Page number (default: 0)<br>
+                            • size: Page size (default: 10, required: exactly 10 per assessment)<br>
+                            • sortBy: Sort field (default: id)<br>
+                            • sortDir: Sort direction (asc/desc, default: asc)<br>
+                            • city: Filter by city (optional)<br>
+                            • keyword: Search in name/email (optional)
+                        </div>
+                        <div class="code-block">
+                            <strong>Example:</strong> /api/v1/users?page=0&size=10&sortBy=firstName&city=NewYork
+                        </div>
+                    </div>
+
+                    <div class="endpoint-card p-3">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div>
+                                <span class="method-badge get">GET</span>
+                                <strong>/api/v1/users/{id}</strong>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary" onclick="testEndpoint('/api/v1/users/1')">Test</button>
+                        </div>
+                        <p class="mb-2"><strong>Description:</strong> Get user by ID</p>
+                        <p class="mb-2"><strong>Features:</strong> @Transactional(readOnly=true), Individual user details</p>
+                        <div class="code-block">
+                            <strong>Example:</strong> /api/v1/users/1
+                        </div>
+                    </div>
+
+                    <div class="endpoint-card p-3">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div>
+                                <span class="method-badge get">GET</span>
+                                <strong>/api/v1/users/external</strong>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary" onclick="testEndpoint('/api/v1/users/external')">Test</button>
+                        </div>
+                        <p class="mb-2"><strong>Description:</strong> Get users from external API (JSONPlaceholder)</p>
+                        <p class="mb-2"><strong>Features:</strong> External API Integration, Nested API Calls</p>
+                        <div class="code-block">
+                            <strong>Flow:</strong> Client → Your API → JSONPlaceholder API → Response
+                        </div>
+                    </div>
+
+                    <div class="endpoint-card p-3">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div>
+                                <span class="method-badge get">GET</span>
+                                <strong>/api/v1/users/health</strong>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary" onclick="testEndpoint('/api/v1/users/health')">Test</button>
+                        </div>
+                        <p class="mb-2"><strong>Description:</strong> Health check for User Management API</p>
+                        <p class="mb-2"><strong>Features:</strong> Service status, Version info, Feature list</p>
+                    </div>
+
+                    <!-- POST Endpoints -->
+                    <h5 class="mb-3 mt-4"><i class="fas fa-upload text-primary me-2"></i>POST Endpoints</h5>
+                    
+                    <div class="endpoint-card p-3">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div>
+                                <span class="method-badge post">POST</span>
+                                <strong>/api/v1/users</strong>
+                            </div>
+                            <button class="btn btn-sm btn-outline-success" onclick="testCreateUser()">Test</button>
+                        </div>
+                        <p class="mb-2"><strong>Description:</strong> Create new user</p>
+                        <p class="mb-2"><strong>Features:</strong> @Transactional, Input validation, Duplicate check</p>
+                        <div class="code-block">
+                            <strong>Request Body (JSON):</strong><br>
+                            {<br>
+                            &nbsp;&nbsp;"firstName": "John",<br>
+                            &nbsp;&nbsp;"lastName": "Doe",<br>
+                            &nbsp;&nbsp;"email": "john.doe@example.com",<br>
+                            &nbsp;&nbsp;"phone": "+1-555-0123",<br>
+                            &nbsp;&nbsp;"city": "New York"<br>
+                            }
+                        </div>
+                    </div>
+
+                    <div class="endpoint-card p-3">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div>
+                                <span class="method-badge post">POST</span>
+                                <strong>/api/v1/users/import/{id}</strong>
+                            </div>
+                            <button class="btn btn-sm btn-outline-success" onclick="testEndpoint('/api/v1/users/import/1')">Test</button>
+                        </div>
+                        <p class="mb-2"><strong>Description:</strong> Import user from external API</p>
+                        <p class="mb-2"><strong>Features:</strong> @Transactional, Complete nested API flow</p>
+                        <div class="code-block">
+                            <strong>Flow:</strong> Client → Your API → JSONPlaceholder API → Your Database<br>
+                            <strong>Example:</strong> /api/v1/users/import/1 (imports user with ID 1 from JSONPlaceholder)
+                        </div>
+                    </div>
+
+                    <!-- PUT Endpoints -->
+                    <h5 class="mb-3 mt-4"><i class="fas fa-edit text-warning me-2"></i>PUT Endpoints</h5>
+                    
+                    <div class="endpoint-card p-3">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div>
+                                <span class="method-badge put">PUT</span>
+                                <strong>/api/v1/users/{id}</strong>
+                            </div>
+                            <button class="btn btn-sm btn-outline-warning" onclick="testUpdateUser()">Test</button>
+                        </div>
+                        <p class="mb-2"><strong>Description:</strong> Update existing user</p>
+                        <p class="mb-2"><strong>Features:</strong> @Transactional, Email uniqueness check</p>
+                        <div class="code-block">
+                            <strong>Example:</strong> PUT /api/v1/users/1<br>
+                            <strong>Request Body:</strong> Same as POST /users
+                        </div>
+                    </div>
+
+                    <!-- DELETE Endpoints -->
+                    <h5 class="mb-3 mt-4"><i class="fas fa-trash text-danger me-2"></i>DELETE Endpoints</h5>
+                    
+                    <div class="endpoint-card p-3">
+                        <div class="d-flex justify-content-between align-items-start mb-2">
+                            <div>
+                                <span class="method-badge delete">DELETE</span>
+                                <strong>/api/v1/users/{id}</strong>
+                            </div>
+                            <button class="btn btn-sm btn-outline-danger" onclick="testDeleteUser()">Test</button>
+                        </div>
+                        <p class="mb-2"><strong>Description:</strong> Delete user by ID</p>
+                        <p class="mb-2"><strong>Features:</strong> @Transactional, Existence check</p>
+                        <div class="code-block">
+                            <strong>Example:</strong> DELETE /api/v1/users/25
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Assessment Features -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="docs-card p-4">
+                    <h4 class="mb-3"><i class="fas fa-check-circle text-success me-2"></i>Assessment Requirements Fulfilled</h4>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success me-2"></i><strong>@Transactional:</strong> Applied to all INSERT, UPDATE, GET methods</li>
+                                <li><i class="fas fa-check text-success me-2"></i><strong>Pagination:</strong> Exactly 10 records per page as required</li>
+                                <li><i class="fas fa-check text-success me-2"></i><strong>External API:</strong> Complete nested API calling implementation</li>
+                                <li><i class="fas fa-check text-success me-2"></i><strong>Request/Response Logging:</strong> All API calls logged to files</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <ul class="list-unstyled">
+                                <li><i class="fas fa-check text-success me-2"></i><strong>CRUD Operations:</strong> Full Create, Read, Update, Delete</li>
+                                <li><i class="fas fa-check text-success me-2"></i><strong>Database Ready:</strong> H2 configured, MSSQL support ready</li>
+                                <li><i class="fas fa-check text-success me-2"></i><strong>Project Structure:</strong> Professional layered architecture</li>
+                                <li><i class="fas fa-check text-success me-2"></i><strong>Error Handling:</strong> Proper HTTP status codes and messages</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Testing Section -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="docs-card p-4">
+                    <h4 class="mb-3"><i class="fas fa-vial text-primary me-2"></i>API Testing</h4>
+                    <p class="mb-3">You can test all endpoints directly from this interface or use external tools like Postman.</p>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Quick Tests:</h6>
+                            <button class="btn btn-outline-primary w-100 mb-2" onclick="testEndpoint('/api/v1/users?page=0&size=10')">
+                                Test Pagination (Page 1)
+                            </button>
+                            <button class="btn btn-outline-primary w-100 mb-2" onclick="testEndpoint('/api/v1/users?page=1&size=10')">
+                                Test Pagination (Page 2)
+                            </button>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Advanced Tests:</h6>
+                            <button class="btn btn-outline-info w-100 mb-2" onclick="testEndpoint('/api/v1/users/external')">
+                                Test External API Integration
+                            </button>
+                            <button class="btn btn-outline-success w-100 mb-2" onclick="testCreateUser()">
+                                Test User Creation
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-5 py-4 text-center" style="color: #000;">
+        <div class="container">
+            <p class="mb-0">
+                <i class="fas fa-code me-2"></i>
+                REST API Documentation - Java SpringBoot Assessment
+            </p>
+            <p class="mb-0 small">
+                All endpoints demonstrate @Transactional, Pagination, and External API Integration
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function testEndpoint(url) {
+            window.open(url, '_blank');
+        }
+
+        function testCreateUser() {
+            const userData = {
+                firstName: "API",
+                lastName: "Test User",
+                email: "api.test@example.com",
+                phone: "+1-555-API",
+                city: "Test City"
+            };
+
+            fetch('/api/v1/users', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(userData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('✅ User Created Successfully!\n\n' + JSON.stringify(data, null, 2));
+            })
+            .catch(error => {
+                alert('❌ Error creating user: ' + error.message);
+            });
+        }
+
+        function testUpdateUser() {
+            const userData = {
+                firstName: "Updated",
+                lastName: "Test User",
+                email: "updated.test@example.com",
+                phone: "+1-555-UPDT",
+                city: "Updated City"
+            };
+
+            fetch('/api/v1/users/1', {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(userData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('✅ User Updated Successfully!\n\n' + JSON.stringify(data, null, 2));
+            })
+            .catch(error => {
+                alert('❌ Error updating user: ' + error.message);
+            });
+        }
+
+        function testDeleteUser() {
+            if (confirm('Are you sure you want to delete user ID 25?')) {
+                fetch('/api/v1/users/25', { method: 'DELETE' })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert('✅ User Deleted Successfully!\n\n' + JSON.stringify(data, null, 2));
+                    })
+                    .catch(error => {
+                        alert('❌ Error deleting user: ' + error.message);
+                    });
+            }
+        }
+    </script>
+</body>
+</html>

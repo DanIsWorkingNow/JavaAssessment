@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">Users Management</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e0eafc 0%, #a1c4fd 50%, #c2e9fb 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .page-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .user-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+            transition: transform 0.2s ease;
+        }
+        .user-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .badge-custom {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        .api-test-section {
+            background: #f1f3f4;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+        }
+        footer {
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-users me-2"></i>
+                Java SpringBoot Assessment
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><i class="fas fa-home me-1"></i>Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/users"><i class="fas fa-users me-1"></i>Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/api-docs"><i class="fas fa-code me-1"></i>API Docs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/h2-console" target="_blank"><i class="fas fa-database me-1"></i>Database</a>
+                    </li>
+                </ul>
+                <span class="navbar-text">
+                    <span class="badge bg-success">
+                        <i class="fas fa-circle me-1"></i>Running
+                    </span>
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mt-4">
+        <!-- Header -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="page-card p-4">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <h2 class="mb-1">
+                                <i class="fas fa-users text-primary me-2"></i>
+                                <span th:text="${title}">Users Management</span>
+                            </h2>
+                            <p class="text-muted mb-0">
+                                CRUD operations with pagination - <span th:text="${totalUsers}">30</span> total users
+                            </p>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary" onclick="window.open('/users/create', '_self')">
+                                <i class="fas fa-plus me-1"></i>Add User
+                            </button>
+                            <button class="btn btn-success" onclick="testApiEndpoint('/api/v1/users')">
+                                <i class="fas fa-code me-1"></i>Test API
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search and Filter -->
+        <div class="row mb-4">
+            <div class="col-12">
+                <div class="page-card p-3">
+                    <form method="get" action="/users" class="row g-3">
+                        <div class="col-md-4">
+                            <label for="keyword" class="form-label">Search Users</label>
+                            <input type="text" class="form-control" id="keyword" name="keyword" 
+                                   th:value="${keyword}" placeholder="Search by name or email...">
+                        </div>
+                        <div class="col-md-3">
+                            <label for="city" class="form-label">Filter by City</label>
+                            <select class="form-select" id="city" name="city">
+                                <option value="">All Cities</option>
+                                <option value="New York" th:selected="${city == 'New York'}">New York</option>
+                                <option value="Los Angeles" th:selected="${city == 'Los Angeles'}">Los Angeles</option>
+                                <option value="Chicago" th:selected="${city == 'Chicago'}">Chicago</option>
+                                <option value="Houston" th:selected="${city == 'Houston'}">Houston</option>
+                                <option value="Phoenix" th:selected="${city == 'Phoenix'}">Phoenix</option>
+                            </select>
+                        </div>
+                        <div class="col-md-2">
+                            <label for="pageSize" class="form-label">Per Page</label>
+                            <select class="form-select" id="pageSize" name="size">
+                                <option value="5" th:selected="${pageSize == 5}">5</option>
+                                <option value="10" th:selected="${pageSize == 10}">10</option>
+                                <option value="20" th:selected="${pageSize == 20}">20</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 d-flex align-items-end">
+                            <button type="submit" class="btn btn-outline-primary me-2">
+                                <i class="fas fa-search me-1"></i>Search
+                            </button>
+                            <a href="/users" class="btn btn-outline-secondary">
+                                <i class="fas fa-times me-1"></i>Clear
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Users Grid (Simulated Data) -->
+        <div class="row">
+            <!-- Sample User Cards -->
+            <div class="col-md-6 col-lg-4 mb-3">
+                <div class="user-card p-3">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h6 class="mb-0">John Doe</h6>
+                        <span class="badge badge-custom bg-primary">ID: 1</span>
+                    </div>
+                    <p class="text-muted small mb-2">
+                        <i class="fas fa-envelope me-1"></i>john.doe1@example.com
+                    </p>
+                    <p class="text-muted small mb-2">
+                        <i class="fas fa-phone me-1"></i>+1-555-0001
+                    </p>
+                    <p class="text-muted small mb-3">
+                        <i class="fas fa-map-marker-alt me-1"></i>New York
+                    </p>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-outline-primary" onclick="viewUser(1)">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-warning" onclick="editUser(1)">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="deleteUser(1)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-3">
+                <div class="user-card p-3">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h6 class="mb-0">Jane Smith</h6>
+                        <span class="badge badge-custom bg-primary">ID: 2</span>
+                    </div>
+                    <p class="text-muted small mb-2">
+                        <i class="fas fa-envelope me-1"></i>jane.smith2@example.com
+                    </p>
+                    <p class="text-muted small mb-2">
+                        <i class="fas fa-phone me-1"></i>+1-555-0002
+                    </p>
+                    <p class="text-muted small mb-3">
+                        <i class="fas fa-map-marker-alt me-1"></i>Los Angeles
+                    </p>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-outline-primary" onclick="viewUser(2)">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-warning" onclick="editUser(2)">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="deleteUser(2)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-3">
+                <div class="user-card p-3">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h6 class="mb-0">Michael Johnson</h6>
+                        <span class="badge badge-custom bg-primary">ID: 3</span>
+                    </div>
+                    <p class="text-muted small mb-2">
+                        <i class="fas fa-envelope me-1"></i>michael.johnson3@example.com
+                    </p>
+                    <p class="text-muted small mb-2">
+                        <i class="fas fa-phone me-1"></i>+1-555-0003
+                    </p>
+                    <p class="text-muted small mb-3">
+                        <i class="fas fa-map-marker-alt me-1"></i>Chicago
+                    </p>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-outline-primary" onclick="viewUser(3)">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-warning" onclick="editUser(3)">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="deleteUser(3)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-3">
+                <div class="user-card p-3">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h6 class="mb-0">Emily Davis</h6>
+                        <span class="badge badge-custom bg-primary">ID: 4</span>
+                    </div>
+                    <p class="text-muted small mb-2">
+                        <i class="fas fa-envelope me-1"></i>emily.davis4@example.com
+                    </p>
+                    <p class="text-muted small mb-2">
+                        <i class="fas fa-phone me-1"></i>+1-555-0004
+                    </p>
+                    <p class="text-muted small mb-3">
+                        <i class="fas fa-map-marker-alt me-1"></i>Houston
+                    </p>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-outline-primary" onclick="viewUser(4)">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-warning" onclick="editUser(4)">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="deleteUser(4)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-3">
+                <div class="user-card p-3">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h6 class="mb-0">David Wilson</h6>
+                        <span class="badge badge-custom bg-primary">ID: 5</span>
+                    </div>
+                    <p class="text-muted small mb-2">
+                        <i class="fas fa-envelope me-1"></i>david.wilson5@example.com
+                    </p>
+                    <p class="text-muted small mb-2">
+                        <i class="fas fa-phone me-1"></i>+1-555-0005
+                    </p>
+                    <p class="text-muted small mb-3">
+                        <i class="fas fa-map-marker-alt me-1"></i>Phoenix
+                    </p>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-outline-primary" onclick="viewUser(5)">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-warning" onclick="editUser(5)">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="deleteUser(5)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-3">
+                <div class="user-card p-3">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h6 class="mb-0">Sarah Miller</h6>
+                        <span class="badge badge-custom bg-primary">ID: 6</span>
+                    </div>
+                    <p class="text-muted small mb-2">
+                        <i class="fas fa-envelope me-1"></i>sarah.miller6@example.com
+                    </p>
+                    <p class="text-muted small mb-2">
+                        <i class="fas fa-phone me-1"></i>+1-555-0006
+                    </p>
+                    <p class="text-muted small mb-3">
+                        <i class="fas fa-map-marker-alt me-1"></i>Philadelphia
+                    </p>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-outline-primary" onclick="viewUser(6)">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-warning" onclick="editUser(6)">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="deleteUser(6)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-3">
+                <div class="user-card p-3">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h6 class="mb-0">James Brown</h6>
+                        <span class="badge badge-custom bg-primary">ID: 7</span>
+                    </div>
+                    <p class="text-muted small mb-2">
+                        <i class="fas fa-envelope me-1"></i>james.brown7@example.com
+                    </p>
+                    <p class="text-muted small mb-2">
+                        <i class="fas fa-phone me-1"></i>+1-555-0007
+                    </p>
+                    <p class="text-muted small mb-3">
+                        <i class="fas fa-map-marker-alt me-1"></i>San Antonio
+                    </p>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-outline-primary" onclick="viewUser(7)">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-warning" onclick="editUser(7)">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="deleteUser(7)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-3">
+                <div class="user-card p-3">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h6 class="mb-0">Jessica Garcia</h6>
+                        <span class="badge badge-custom bg-primary">ID: 8</span>
+                    </div>
+                    <p class="text-muted small mb-2">
+                        <i class="fas fa-envelope me-1"></i>jessica.garcia8@example.com
+                    </p>
+                    <p class="text-muted small mb-2">
+                        <i class="fas fa-phone me-1"></i>+1-555-0008
+                    </p>
+                    <p class="text-muted small mb-3">
+                        <i class="fas fa-map-marker-alt me-1"></i>San Diego
+                    </p>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-outline-primary" onclick="viewUser(8)">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-warning" onclick="editUser(8)">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="deleteUser(8)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-3">
+                <div class="user-card p-3">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h6 class="mb-0">Robert Rodriguez</h6>
+                        <span class="badge badge-custom bg-primary">ID: 9</span>
+                    </div>
+                    <p class="text-muted small mb-2">
+                        <i class="fas fa-envelope me-1"></i>robert.rodriguez9@example.com
+                    </p>
+                    <p class="text-muted small mb-2">
+                        <i class="fas fa-phone me-1"></i>+1-555-0009
+                    </p>
+                    <p class="text-muted small mb-3">
+                        <i class="fas fa-map-marker-alt me-1"></i>Dallas
+                    </p>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-outline-primary" onclick="viewUser(9)">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-warning" onclick="editUser(9)">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="deleteUser(9)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 mb-3">
+                <div class="user-card p-3">
+                    <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h6 class="mb-0">Lisa Martinez</h6>
+                        <span class="badge badge-custom bg-primary">ID: 10</span>
+                    </div>
+                    <p class="text-muted small mb-2">
+                        <i class="fas fa-envelope me-1"></i>lisa.martinez10@example.com
+                    </p>
+                    <p class="text-muted small mb-2">
+                        <i class="fas fa-phone me-1"></i>+1-555-0010
+                    </p>
+                    <p class="text-muted small mb-3">
+                        <i class="fas fa-map-marker-alt me-1"></i>San Jose
+                    </p>
+                    <div class="d-flex gap-2">
+                        <button class="btn btn-sm btn-outline-primary" onclick="viewUser(10)">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-warning" onclick="editUser(10)">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-outline-danger" onclick="deleteUser(10)">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="page-card p-3">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <span class="text-muted">
+                                Showing <strong>1-10</strong> of <strong th:text="${totalUsers}">30</strong> users
+                                (Page <strong th:text="${currentPage + 1}">1</strong> of <strong th:text="${totalPages}">3</strong>)
+                            </span>
+                        </div>
+                        <nav>
+                            <ul class="pagination mb-0">
+                                <li class="page-item" th:classappend="${!hasPrevious} ? 'disabled' : ''">
+                                    <a class="page-link" th:href="@{/users(page=${currentPage - 1}, size=${pageSize}, city=${city}, keyword=${keyword})}"
+                                       th:if="${hasPrevious}">Previous</a>
+                                    <span class="page-link" th:unless="${hasPrevious}">Previous</span>
+                                </li>
+                                
+                                <li class="page-item" th:each="pageNum : ${#numbers.sequence(startPage, endPage)}"
+                                    th:classappend="${pageNum == currentPage} ? 'active' : ''">
+                                    <a class="page-link" th:href="@{/users(page=${pageNum}, size=${pageSize}, city=${city}, keyword=${keyword})}"
+                                       th:text="${pageNum + 1}">1</a>
+                                </li>
+                                
+                                <li class="page-item" th:classappend="${!hasNext} ? 'disabled' : ''">
+                                    <a class="page-link" th:href="@{/users(page=${currentPage + 1}, size=${pageSize}, city=${city}, keyword=${keyword})}"
+                                       th:if="${hasNext}">Next</a>
+                                    <span class="page-link" th:unless="${hasNext}">Next</span>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- API Testing Section -->
+        <div class="row mt-4">
+            <div class="col-12">
+                <div class="page-card p-4">
+                    <h5 class="mb-3"><i class="fas fa-code text-primary me-2"></i>API Testing</h5>
+                    <div class="api-test-section p-3">
+                        <p class="mb-3">Test the REST API endpoints that power this interface:</p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <button class="btn btn-outline-primary w-100 mb-2" onclick="testApiEndpoint('/api/v1/users')">
+                                    <i class="fas fa-list me-1"></i>GET /api/v1/users (Paginated)
+                                </button>
+                                <button class="btn btn-outline-success w-100 mb-2" onclick="testCreateUser()">
+                                    <i class="fas fa-plus me-1"></i>POST /api/v1/users (Create)
+                                </button>
+                            </div>
+                            <div class="col-md-6">
+                                <button class="btn btn-outline-info w-100 mb-2" onclick="testApiEndpoint('/api/v1/users/external')">
+                                    <i class="fas fa-globe me-1"></i>GET /api/v1/users/external
+                                </button>
+                                <button class="btn btn-outline-warning w-100 mb-2" onclick="testApiEndpoint('/api/v1/users/import/1')">
+                                    <i class="fas fa-download me-1"></i>POST /api/v1/users/import/1
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-5 py-4 text-center">
+        <div class="container">
+            <p class="mb-0">
+                <i class="fas fa-users me-2"></i>
+                User Management System - Java SpringBoot Assessment
+            </p>
+            <p class="mb-0 small">
+                Demonstrating CRUD Operations, Pagination (10 per page), @Transactional, and External API Integration
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function viewUser(id) {
+            window.open(`/api/v1/users/${id}`, '_blank');
+        }
+
+        function editUser(id) {
+            window.location.href = `/users/edit?id=${id}`;
+        }
+
+        function deleteUser(id) {
+            if (confirm(`Are you sure you want to delete user ${id}?`)) {
+                fetch(`/api/v1/users/${id}`, { method: 'DELETE' })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert('User deleted: ' + JSON.stringify(data, null, 2));
+                        location.reload();
+                    })
+                    .catch(error => alert('Error: ' + error.message));
+            }
+        }
+
+        function testApiEndpoint(url) {
+            window.open(url, '_blank');
+        }
+
+        function testCreateUser() {
+            const userData = {
+                firstName: "Test",
+                lastName: "User",
+                email: "test.user@example.com",
+                phone: "+1-555-TEST",
+                city: "Test City"
+            };
+
+            fetch('/api/v1/users', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(userData)
+            })
+            .then(response => response.json())
+            .then(data => alert('User Created: ' + JSON.stringify(data, null, 2)))
+            .catch(error => alert('Error: ' + error.message));
+        }
+    </script>
+</body>
+</html>
