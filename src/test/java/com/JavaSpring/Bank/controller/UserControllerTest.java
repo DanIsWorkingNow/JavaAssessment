@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureTestMvc;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;  // ✅ Fixed import
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 
@@ -17,7 +17,7 @@ import static org.hamcrest.Matchers.*;
  * Tests all endpoints with proper assertions
  */
 @SpringBootTest
-@AutoConfigureTestMvc
+@AutoConfigureMockMvc  // ✅ Fixed annotation name (was AutoConfigureTestMvc)
 @TestPropertySource(properties = "spring.profiles.active=test")
 public class UserControllerTest {
     
@@ -131,7 +131,7 @@ public class UserControllerTest {
     @Test
     void testImportUserFromExternalApi() throws Exception {
         mockMvc.perform(post("/api/v1/users/import/1"))
-                .andExpected(status().isCreated())
+                .andExpect(status().isCreated())  // ✅ Fixed typo (was .andExpected)
                 .andExpect(jsonPath("$.source", is("JSONPlaceholder API")))
                 .andExpect(jsonPath("$.externalId", is(1)));
     }
