@@ -1,4 +1,4 @@
-package main.java.com.JavaSpring.Bank.dto.external;
+package com.JavaSpring.Bank.dto.external;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

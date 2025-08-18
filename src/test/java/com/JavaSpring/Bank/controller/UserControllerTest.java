@@ -1,4 +1,4 @@
-package test.java.com.JavaSpring.Bank.controller;
+package com.JavaSpring.Bank.controller;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

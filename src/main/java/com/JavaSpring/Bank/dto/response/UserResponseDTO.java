@@ -1,4 +1,4 @@
-package main.java.com.JavaSpring.Bank.dto.response;
+package com.JavaSpring.Bank.dto.response;
 
 import com.JavaSpring.Bank.entity.User;
 import java.time.LocalDateTime;

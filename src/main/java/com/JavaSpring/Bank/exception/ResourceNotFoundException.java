@@ -1,4 +1,4 @@
-package main.java.com.JavaSpring.Bank.exception;
+package com.JavaSpring.Bank.exception;
 
 public class ResourceNotFoundException extends RuntimeException {
     public ResourceNotFoundException(String message) {

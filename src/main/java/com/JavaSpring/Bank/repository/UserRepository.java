@@ -1,4 +1,4 @@
-package main.java.com.JavaSpring.Bank.repository;
+package com.JavaSpring.Bank.repository;
 
 import com.JavaSpring.Bank.entity.User;
 import org.springframework.data.domain.Page;

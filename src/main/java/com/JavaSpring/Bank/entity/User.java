@@ -1,4 +1,4 @@
-package main.java.com.JavaSpring.Bank.entity;
+package com.JavaSpring.Bank.entity;
 
 
 import jakarta.persistence.*;

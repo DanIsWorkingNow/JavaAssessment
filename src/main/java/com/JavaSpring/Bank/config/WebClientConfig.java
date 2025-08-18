@@ -1,4 +1,4 @@
-package main.java.com.JavaSpring.Bank.config;
+package com.JavaSpring.Bank.config;
 
 
 

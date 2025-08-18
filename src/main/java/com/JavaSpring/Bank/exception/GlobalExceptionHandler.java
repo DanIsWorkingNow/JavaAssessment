@@ -1,4 +1,4 @@
-package main.java.com.JavaSpring.Bank.exception;
+package com.JavaSpring.Bank.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package main.java.com.JavaSpring.Bank.dto.request;
+package com.JavaSpring.Bank.dto.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

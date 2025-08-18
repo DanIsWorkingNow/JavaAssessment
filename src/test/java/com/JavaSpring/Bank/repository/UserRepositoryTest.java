@@ -1,1 +1,1 @@
-package test.java.com.JavaSpring.Bank.repository;
+package com.JavaSpring.Bank.repository;
