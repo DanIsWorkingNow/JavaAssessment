@@ -3,21 +3,31 @@ spring:
     name: User-Management-System
   
   profiles:
-    active: dev
-  
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
-  
+    active: prod  # CHANGED: was 'dev', now 'prod' for SQL Server
+
+  # SQL SERVER CONFIGURATION - ADDED
+  datasource:
+    url: jdbc:sqlserver://localhost\\SQLEXPRESS;databaseName=TESTDB;encrypt=true;trustServerCertificate=true;integratedSecurity=true
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      connection-timeout: 30000
+      idle-timeout: 300000
+
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
     properties:
       hibernate:
+        dialect: org.hibernate.dialect.SQLServerDialect  # CHANGED: was H2Dialect
         format_sql: true
-    database-platform: org.hibernate.dialect.H2Dialect
+    database-platform: org.hibernate.dialect.SQLServerDialect  # CHANGED: was H2Dialect
+
+  h2:
+    console:
+      enabled: false  # CHANGED: was true, now false (disable H2)
   
   thymeleaf:
     cache: false
@@ -31,11 +41,13 @@ spring:
       cache:
         period: 0
 
-# Logging configuration
+# Logging configuration - KEEP AS IS
 logging:
   level:
     com.JavaSpring.Bank: DEBUG
     org.springframework.web: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
@@ -44,14 +56,14 @@ logging:
     max-size: 10MB
     max-history: 10
 
-# External API configuration
+# External API configuration - KEEP AS IS
 external:
   api:
     jsonplaceholder:
       base-url: https://jsonplaceholder.typicode.com
       timeout: 5000
 
-# Management endpoints
+# Management endpoints - KEEP AS IS
 management:
   endpoints:
     web:
