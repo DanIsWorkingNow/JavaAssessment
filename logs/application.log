@@ -1486,3 +1486,16 @@ org.thymeleaf.exceptions.TemplateInputException: Error resolving template [api-d
 2025-08-19 11:21:54 [http-nio-8080-exec-4] INFO  c.J.Bank.controller.WebController - RESPONSE - GET /users - Users list page loaded for page 0 with 10 users
 2025-08-19 11:21:54 [http-nio-8080-exec-4] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
 2025-08-19 11:21:54 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-08-19 11:23:17 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - GET "/users", parameters={}
+2025-08-19 11:23:17 [http-nio-8080-exec-9] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.JavaSpring.Bank.controller.WebController#usersList(int, int, String, String, Model)
+2025-08-19 11:23:17 [http-nio-8080-exec-9] INFO  c.J.Bank.controller.WebController - REQUEST - GET /users - Loading users list page: 0, size: 10, city: null, keyword: null
+2025-08-19 11:23:17 [http-nio-8080-exec-9] INFO  c.J.Bank.service.UserService - Fetching users with pagination - Page: 0, Size: 10, SortBy: id, SortDir: asc, City: null, Keyword: null
+2025-08-19 11:23:17 [http-nio-8080-exec-9] INFO  c.J.Bank.controller.WebController - RESPONSE - GET /users - Users list page loaded for page 0 with 10 users
+2025-08-19 11:23:17 [http-nio-8080-exec-9] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2025-08-19 11:23:17 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-08-19 11:26:23 [SpringApplicationShutdownHook] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Commencing graceful shutdown. Waiting for active requests to complete
+2025-08-19 11:26:24 [tomcat-shutdown] INFO  o.s.b.w.e.tomcat.GracefulShutdown - Graceful shutdown complete
+2025-08-19 11:26:24 [SpringApplicationShutdownHook] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-08-19 11:26:24 [SpringApplicationShutdownHook] WARN  o.s.b.f.s.DisposableBeanAdapter - Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-232]
+2025-08-19 11:26:24 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2025-08-19 11:26:24 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.

@@ -150,294 +150,81 @@
             </div>
         </div>
 
-        <!-- Users Grid (Simulated Data) -->
+        <!-- Users Grid (REAL DATABASE DATA) -->
         <div class="row">
-            <!-- Sample User Cards -->
-            <div class="col-md-6 col-lg-4 mb-3">
+            <!-- Dynamic User Cards from Database -->
+            <div class="col-md-6 col-lg-4 mb-3" th:each="user : ${users}">
                 <div class="user-card p-3">
                     <div class="d-flex justify-content-between align-items-start mb-2">
-                        <h6 class="mb-0">John Doe</h6>
-                        <span class="badge badge-custom bg-primary">ID: 1</span>
+                        <h6 class="mb-0" th:text="${user.firstName + ' ' + user.lastName}">User Name</h6>
+                        <span class="badge badge-custom bg-primary" th:text="'ID: ' + ${user.id}">ID: 1</span>
                     </div>
                     <p class="text-muted small mb-2">
-                        <i class="fas fa-envelope me-1"></i>john.doe1@example.com
+                        <i class="fas fa-envelope me-1"></i>
+                        <span th:text="${user.email}">user@example.com</span>
                     </p>
-                    <p class="text-muted small mb-2">
-                        <i class="fas fa-phone me-1"></i>+1-555-0001
+                    <p class="text-muted small mb-2" th:if="${user.phone}">
+                        <i class="fas fa-phone me-1"></i>
+                        <span th:text="${user.phone}">+1-555-0000</span>
                     </p>
-                    <p class="text-muted small mb-3">
-                        <i class="fas fa-map-marker-alt me-1"></i>New York
+                    <p class="text-muted small mb-3" th:if="${user.city}">
+                        <i class="fas fa-map-marker-alt me-1"></i>
+                        <span th:text="${user.city}">City</span>
                     </p>
                     <div class="d-flex gap-2">
-                        <button class="btn btn-sm btn-outline-primary" onclick="viewUser(1)">
+                        <button class="btn btn-sm btn-outline-primary" th:onclick="'viewUser(' + ${user.id} + ')'">
                             <i class="fas fa-eye"></i>
                         </button>
-                        <button class="btn btn-sm btn-outline-warning" onclick="editUser(1)">
+                        <button class="btn btn-sm btn-outline-warning" th:onclick="'editUser(' + ${user.id} + ')'">
                             <i class="fas fa-edit"></i>
                         </button>
-                        <button class="btn btn-sm btn-outline-danger" onclick="deleteUser(1)">
+                        <button class="btn btn-sm btn-outline-danger" th:onclick="'deleteUser(' + ${user.id} + ')'">
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-6 col-lg-4 mb-3">
-                <div class="user-card p-3">
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                        <h6 class="mb-0">Jane Smith</h6>
-                        <span class="badge badge-custom bg-primary">ID: 2</span>
-                    </div>
-                    <p class="text-muted small mb-2">
-                        <i class="fas fa-envelope me-1"></i>jane.smith2@example.com
+            
+            <!-- Show message if no users found -->
+            <div class="col-12" th:if="${#lists.isEmpty(users)}">
+                <div class="page-card p-4 text-center">
+                    <i class="fas fa-users fa-3x text-muted mb-3"></i>
+                    <h5 class="text-muted">No users found</h5>
+                    <p class="text-muted mb-3">
+                        <span th:if="${keyword != null or city != null}">
+                            Try adjusting your search criteria or 
+                            <a href="/users" class="btn btn-link p-0">clear filters</a>
+                        </span>
+                        <span th:unless="${keyword != null or city != null}">
+                            Start by creating your first user!
+                        </span>
                     </p>
-                    <p class="text-muted small mb-2">
-                        <i class="fas fa-phone me-1"></i>+1-555-0002
-                    </p>
-                    <p class="text-muted small mb-3">
-                        <i class="fas fa-map-marker-alt me-1"></i>Los Angeles
-                    </p>
-                    <div class="d-flex gap-2">
-                        <button class="btn btn-sm btn-outline-primary" onclick="viewUser(2)">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-warning" onclick="editUser(2)">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-danger" onclick="deleteUser(2)">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
+                    <a href="/users/create" class="btn btn-primary">
+                        <i class="fas fa-plus me-1"></i>Create First User
+                    </a>
                 </div>
             </div>
+        </div>
 
-            <div class="col-md-6 col-lg-4 mb-3">
-                <div class="user-card p-3">
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                        <h6 class="mb-0">Michael Johnson</h6>
-                        <span class="badge badge-custom bg-primary">ID: 3</span>
+        <!-- User Details Modal (Enhanced) -->
+        <div class="modal fade" id="userModal" tabindex="-1">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">
+                            <i class="fas fa-user me-2"></i>User Details
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
-                    <p class="text-muted small mb-2">
-                        <i class="fas fa-envelope me-1"></i>michael.johnson3@example.com
-                    </p>
-                    <p class="text-muted small mb-2">
-                        <i class="fas fa-phone me-1"></i>+1-555-0003
-                    </p>
-                    <p class="text-muted small mb-3">
-                        <i class="fas fa-map-marker-alt me-1"></i>Chicago
-                    </p>
-                    <div class="d-flex gap-2">
-                        <button class="btn btn-sm btn-outline-primary" onclick="viewUser(3)">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-warning" onclick="editUser(3)">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-danger" onclick="deleteUser(3)">
-                            <i class="fas fa-trash"></i>
-                        </button>
+                    <div class="modal-body">
+                        <div id="userDetails">
+                            <!-- User details will be populated by JavaScript -->
+                        </div>
                     </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4 mb-3">
-                <div class="user-card p-3">
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                        <h6 class="mb-0">Emily Davis</h6>
-                        <span class="badge badge-custom bg-primary">ID: 4</span>
-                    </div>
-                    <p class="text-muted small mb-2">
-                        <i class="fas fa-envelope me-1"></i>emily.davis4@example.com
-                    </p>
-                    <p class="text-muted small mb-2">
-                        <i class="fas fa-phone me-1"></i>+1-555-0004
-                    </p>
-                    <p class="text-muted small mb-3">
-                        <i class="fas fa-map-marker-alt me-1"></i>Houston
-                    </p>
-                    <div class="d-flex gap-2">
-                        <button class="btn btn-sm btn-outline-primary" onclick="viewUser(4)">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-warning" onclick="editUser(4)">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-danger" onclick="deleteUser(4)">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4 mb-3">
-                <div class="user-card p-3">
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                        <h6 class="mb-0">David Wilson</h6>
-                        <span class="badge badge-custom bg-primary">ID: 5</span>
-                    </div>
-                    <p class="text-muted small mb-2">
-                        <i class="fas fa-envelope me-1"></i>david.wilson5@example.com
-                    </p>
-                    <p class="text-muted small mb-2">
-                        <i class="fas fa-phone me-1"></i>+1-555-0005
-                    </p>
-                    <p class="text-muted small mb-3">
-                        <i class="fas fa-map-marker-alt me-1"></i>Phoenix
-                    </p>
-                    <div class="d-flex gap-2">
-                        <button class="btn btn-sm btn-outline-primary" onclick="viewUser(5)">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-warning" onclick="editUser(5)">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-danger" onclick="deleteUser(5)">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4 mb-3">
-                <div class="user-card p-3">
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                        <h6 class="mb-0">Sarah Miller</h6>
-                        <span class="badge badge-custom bg-primary">ID: 6</span>
-                    </div>
-                    <p class="text-muted small mb-2">
-                        <i class="fas fa-envelope me-1"></i>sarah.miller6@example.com
-                    </p>
-                    <p class="text-muted small mb-2">
-                        <i class="fas fa-phone me-1"></i>+1-555-0006
-                    </p>
-                    <p class="text-muted small mb-3">
-                        <i class="fas fa-map-marker-alt me-1"></i>Philadelphia
-                    </p>
-                    <div class="d-flex gap-2">
-                        <button class="btn btn-sm btn-outline-primary" onclick="viewUser(6)">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-warning" onclick="editUser(6)">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-danger" onclick="deleteUser(6)">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4 mb-3">
-                <div class="user-card p-3">
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                        <h6 class="mb-0">James Brown</h6>
-                        <span class="badge badge-custom bg-primary">ID: 7</span>
-                    </div>
-                    <p class="text-muted small mb-2">
-                        <i class="fas fa-envelope me-1"></i>james.brown7@example.com
-                    </p>
-                    <p class="text-muted small mb-2">
-                        <i class="fas fa-phone me-1"></i>+1-555-0007
-                    </p>
-                    <p class="text-muted small mb-3">
-                        <i class="fas fa-map-marker-alt me-1"></i>San Antonio
-                    </p>
-                    <div class="d-flex gap-2">
-                        <button class="btn btn-sm btn-outline-primary" onclick="viewUser(7)">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-warning" onclick="editUser(7)">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-danger" onclick="deleteUser(7)">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4 mb-3">
-                <div class="user-card p-3">
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                        <h6 class="mb-0">Jessica Garcia</h6>
-                        <span class="badge badge-custom bg-primary">ID: 8</span>
-                    </div>
-                    <p class="text-muted small mb-2">
-                        <i class="fas fa-envelope me-1"></i>jessica.garcia8@example.com
-                    </p>
-                    <p class="text-muted small mb-2">
-                        <i class="fas fa-phone me-1"></i>+1-555-0008
-                    </p>
-                    <p class="text-muted small mb-3">
-                        <i class="fas fa-map-marker-alt me-1"></i>San Diego
-                    </p>
-                    <div class="d-flex gap-2">
-                        <button class="btn btn-sm btn-outline-primary" onclick="viewUser(8)">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-warning" onclick="editUser(8)">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-danger" onclick="deleteUser(8)">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4 mb-3">
-                <div class="user-card p-3">
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                        <h6 class="mb-0">Robert Rodriguez</h6>
-                        <span class="badge badge-custom bg-primary">ID: 9</span>
-                    </div>
-                    <p class="text-muted small mb-2">
-                        <i class="fas fa-envelope me-1"></i>robert.rodriguez9@example.com
-                    </p>
-                    <p class="text-muted small mb-2">
-                        <i class="fas fa-phone me-1"></i>+1-555-0009
-                    </p>
-                    <p class="text-muted small mb-3">
-                        <i class="fas fa-map-marker-alt me-1"></i>Dallas
-                    </p>
-                    <div class="d-flex gap-2">
-                        <button class="btn btn-sm btn-outline-primary" onclick="viewUser(9)">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-warning" onclick="editUser(9)">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-danger" onclick="deleteUser(9)">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4 mb-3">
-                <div class="user-card p-3">
-                    <div class="d-flex justify-content-between align-items-start mb-2">
-                        <h6 class="mb-0">Lisa Martinez</h6>
-                        <span class="badge badge-custom bg-primary">ID: 10</span>
-                    </div>
-                    <p class="text-muted small mb-2">
-                        <i class="fas fa-envelope me-1"></i>lisa.martinez10@example.com
-                    </p>
-                    <p class="text-muted small mb-2">
-                        <i class="fas fa-phone me-1"></i>+1-555-0010
-                    </p>
-                    <p class="text-muted small mb-3">
-                        <i class="fas fa-map-marker-alt me-1"></i>San Jose
-                    </p>
-                    <div class="d-flex gap-2">
-                        <button class="btn btn-sm btn-outline-primary" onclick="viewUser(10)">
-                            <i class="fas fa-eye"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-warning" onclick="editUser(10)">
-                            <i class="fas fa-edit"></i>
-                        </button>
-                        <button class="btn btn-sm btn-outline-danger" onclick="deleteUser(10)">
-                            <i class="fas fa-trash"></i>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="editFromModal">
+                            <i class="fas fa-edit me-1"></i>Edit User
                         </button>
                     </div>
                 </div>
@@ -526,49 +313,102 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        function viewUser(id) {
-            window.open(`/api/v1/users/${id}`, '_blank');
-        }
+<script>
+    // View user details
+    function viewUser(id) {
+        fetch(`/api/v1/users/${id}`)
+            .then(response => response.json())
+            .then(user => {
+                const userDetails = document.getElementById('userDetails');
+                userDetails.innerHTML = `
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>Personal Information</h6>
+                            <p><strong>ID:</strong> ${user.id}</p>
+                            <p><strong>Name:</strong> ${user.firstName} ${user.lastName}</p>
+                            <p><strong>Email:</strong> ${user.email}</p>
+                        </div>
+                        <div class="col-md-6">
+                            <h6>Contact & Location</h6>
+                            <p><strong>Phone:</strong> ${user.phone || 'Not provided'}</p>
+                            <p><strong>City:</strong> ${user.city || 'Not provided'}</p>
+                            <p><strong>Created:</strong> ${new Date(user.createdAt).toLocaleDateString()}</p>
+                        </div>
+                    </div>
+                `;
+                
+                // Set up edit button
+                document.getElementById('editFromModal').onclick = () => {
+                    window.location.href = `/users/edit?id=${id}`;
+                };
+                
+                // Show modal
+                new bootstrap.Modal(document.getElementById('userModal')).show();
+            })
+            .catch(error => {
+                alert('Error loading user details: ' + error.message);
+            });
+    }
 
-        function editUser(id) {
-            window.location.href = `/users/edit?id=${id}`;
-        }
+    // Edit user
+    function editUser(id) {
+        window.location.href = `/users/edit?id=${id}`;
+    }
 
-        function deleteUser(id) {
-            if (confirm(`Are you sure you want to delete user ${id}?`)) {
-                fetch(`/api/v1/users/${id}`, { method: 'DELETE' })
-                    .then(response => response.json())
-                    .then(data => {
-                        alert('User deleted: ' + JSON.stringify(data, null, 2));
-                        location.reload();
-                    })
-                    .catch(error => alert('Error: ' + error.message));
-            }
-        }
-
-        function testApiEndpoint(url) {
-            window.open(url, '_blank');
-        }
-
-        function testCreateUser() {
-            const userData = {
-                firstName: "Test",
-                lastName: "User",
-                email: "test.user@example.com",
-                phone: "+1-555-TEST",
-                city: "Test City"
-            };
-
-            fetch('/api/v1/users', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(userData)
+    // Delete user with confirmation
+    function deleteUser(id) {
+        if (confirm(`Are you sure you want to delete user ${id}?`)) {
+            fetch(`/api/v1/users/${id}`, { 
+                method: 'DELETE' 
             })
             .then(response => response.json())
-            .then(data => alert('User Created: ' + JSON.stringify(data, null, 2)))
-            .catch(error => alert('Error: ' + error.message));
+            .then(data => {
+                alert('User deleted successfully!');
+                // Reload the current page to show updated list
+                window.location.reload();
+            })
+            .catch(error => {
+                alert('Error deleting user: ' + error.message);
+            });
         }
-    </script>
+    }
+
+    // Test API endpoint
+    function testApiEndpoint(url) {
+        window.open(url, '_blank');
+    }
+
+    // Test create user functionality
+    function testCreateUser() {
+        const userData = {
+            firstName: "Test",
+            lastName: "User",
+            email: "test.user" + Date.now() + "@example.com",
+            phone: "+1-555-TEST",
+            city: "Test City"
+        };
+
+        fetch('/api/v1/users', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(userData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert('Test user created successfully! ID: ' + data.id);
+            // Reload to show the new user
+            window.location.reload();
+        })
+        .catch(error => {
+            alert('Error creating test user: ' + error.message);
+        });
+    }
+
+    // Auto-refresh page every 30 seconds to show latest data (optional)
+    // setInterval(() => {
+    //     console.log('Auto-refreshing user list...');
+    //     window.location.reload();
+    // }, 30000);
+</script>
 </body>
 </html>
