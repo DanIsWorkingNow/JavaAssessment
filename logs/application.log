@@ -1499,3 +1499,219 @@ org.thymeleaf.exceptions.TemplateInputException: Error resolving template [api-d
 2025-08-19 11:26:24 [SpringApplicationShutdownHook] WARN  o.s.b.f.s.DisposableBeanAdapter - Invocation of destroy method failed on bean with name 'inMemoryDatabaseShutdownExecutor': org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-232]
 2025-08-19 11:26:24 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
 2025-08-19 11:26:24 [SpringApplicationShutdownHook] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2025-08-19 11:26:46 [restartedMain] INFO  com.JavaSpring.Bank.BankApplication - Starting BankApplication using Java 21.0.6 with PID 27192 (C:\Maybank Assessment\Bank\target\classes started by user in C:\Maybank Assessment\Bank)
+2025-08-19 11:26:46 [restartedMain] DEBUG com.JavaSpring.Bank.BankApplication - Running with Spring Boot v3.5.4, Spring v6.2.9
+2025-08-19 11:26:46 [restartedMain] INFO  com.JavaSpring.Bank.BankApplication - The following 1 profile is active: "dev"
+2025-08-19 11:26:46 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-08-19 11:26:46 [restartedMain] INFO  o.s.b.d.e.DevToolsPropertyDefaultsPostProcessor - For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-08-19 11:26:48 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-08-19 11:26:49 [restartedMain] INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 363 ms. Found 1 JPA repository interface.
+2025-08-19 11:26:50 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2025-08-19 11:26:50 [restartedMain] INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2025-08-19 11:26:50 [restartedMain] INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.43]
+2025-08-19 11:26:51 [restartedMain] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2025-08-19 11:26:51 [restartedMain] INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 4277 ms
+2025-08-19 11:26:51 [restartedMain] DEBUG o.s.w.f.ServerHttpObservationFilter - Filter 'webMvcObservationFilter' configured for use
+2025-08-19 11:26:51 [restartedMain] INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-08-19 11:26:51 [restartedMain] INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.6.22.Final
+2025-08-19 11:26:51 [restartedMain] INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2025-08-19 11:26:52 [restartedMain] INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-08-19 11:26:52 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2025-08-19 11:26:53 [restartedMain] INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection conn0: url=jdbc:h2:mem:2fcf5f12-35c4-47fc-ae7c-58879c8f36d7 user=SA
+2025-08-19 11:26:53 [restartedMain] INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2025-08-19 11:26:53 [restartedMain] WARN  org.hibernate.orm.deprecation - HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-08-19 11:26:53 [restartedMain] INFO  o.hibernate.orm.connections.pooling - HHH10001005: Database info:
+	Database JDBC URL [Connecting through datasource 'HikariDataSource (HikariPool-1)']
+	Database driver: undefined/unknown
+	Database version: 2.3.232
+	Autocommit mode: undefined/unknown
+	Isolation level: undefined/unknown
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-08-19 11:26:55 [restartedMain] INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-08-19 11:26:55 [restartedMain] INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-08-19 11:26:56 [restartedMain] INFO  o.s.d.j.r.query.QueryEnhancerFactory - Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-08-19 11:27:00 [restartedMain] WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-08-19 11:27:00 [restartedMain] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - 14 mappings in 'requestMappingHandlerMapping'
+2025-08-19 11:27:00 [restartedMain] DEBUG o.s.w.s.h.SimpleUrlHandlerMapping - Patterns [/webjars/**, /**] in 'resourceHandlerMapping'
+2025-08-19 11:27:00 [restartedMain] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerAdapter - ControllerAdvice beans: 0 @ModelAttribute, 0 @InitBinder, 1 RequestBodyAdvice, 1 ResponseBodyAdvice
+2025-08-19 11:27:01 [restartedMain] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - ControllerAdvice beans: 1 @ExceptionHandler, 1 ResponseBodyAdvice
+2025-08-19 11:27:01 [restartedMain] INFO  o.s.b.a.h.H2ConsoleAutoConfiguration - H2 console available at '/h2-console'. Database available at 'jdbc:h2:mem:2fcf5f12-35c4-47fc-ae7c-58879c8f36d7'
+2025-08-19 11:27:01 [restartedMain] INFO  o.s.b.d.a.OptionalLiveReloadServer - LiveReload server is running on port 35729
+2025-08-19 11:27:01 [restartedMain] INFO  o.s.b.a.e.web.EndpointLinksResolver - Exposing 3 endpoints beneath base path '/actuator'
+2025-08-19 11:27:01 [restartedMain] INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2025-08-19 11:27:01 [restartedMain] INFO  com.JavaSpring.Bank.BankApplication - Started BankApplication in 16.533 seconds (process running for 17.698)
+2025-08-19 11:27:02 [restartedMain] INFO  c.J.Bank.config.DataInitializer - Initializing database with sample users...
+2025-08-19 11:27:02 [restartedMain] INFO  c.J.Bank.config.DataInitializer - Successfully initialized database with 30 sample users
+2025-08-19 11:38:02 [http-nio-8080-exec-1] INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-08-19 11:38:02 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2025-08-19 11:38:02 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected StandardServletMultipartResolver
+2025-08-19 11:38:02 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected AcceptHeaderLocaleResolver
+2025-08-19 11:38:02 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected FixedThemeResolver
+2025-08-19 11:38:02 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.view.DefaultRequestToViewNameTranslator@17c43990
+2025-08-19 11:38:02 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Detected org.springframework.web.servlet.support.SessionFlashMapManager@39a1b44c
+2025-08-19 11:38:03 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - enableLoggingRequestDetails='false': request parameters and headers will be masked to prevent unsafe logging of potentially sensitive data
+2025-08-19 11:38:03 [http-nio-8080-exec-1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 121 ms
+2025-08-19 11:38:03 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET "/", parameters={}
+2025-08-19 11:38:03 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.JavaSpring.Bank.controller.WebController#dashboard(Model)
+2025-08-19 11:38:03 [http-nio-8080-exec-1] INFO  c.J.Bank.controller.WebController - REQUEST - GET / - Loading dashboard
+2025-08-19 11:38:03 [http-nio-8080-exec-1] INFO  c.J.Bank.service.UserService - Fetching users with pagination - Page: 0, Size: 1, SortBy: id, SortDir: asc, City: null, Keyword: null
+2025-08-19 11:38:04 [http-nio-8080-exec-1] INFO  c.J.Bank.controller.WebController - RESPONSE - GET / - Dashboard loaded successfully with 30 users
+2025-08-19 11:38:04 [http-nio-8080-exec-1] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2025-08-19 11:38:05 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-08-19 11:38:10 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - GET "/users", parameters={}
+2025-08-19 11:38:10 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.JavaSpring.Bank.controller.WebController#usersList(int, int, String, String, Model)
+2025-08-19 11:38:10 [http-nio-8080-exec-2] INFO  c.J.Bank.controller.WebController - REQUEST - GET /users - Loading users list page: 0, size: 10, city: null, keyword: null
+2025-08-19 11:38:10 [http-nio-8080-exec-2] INFO  c.J.Bank.service.UserService - Fetching users with pagination - Page: 0, Size: 10, SortBy: id, SortDir: asc, City: null, Keyword: null
+2025-08-19 11:38:10 [http-nio-8080-exec-2] INFO  c.J.Bank.controller.WebController - RESPONSE - GET /users - Users list page loaded for page 0 with 10 users
+2025-08-19 11:38:10 [http-nio-8080-exec-2] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2025-08-19 11:38:10 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-08-19 11:38:13 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - GET "/users", parameters={}
+2025-08-19 11:38:13 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.JavaSpring.Bank.controller.WebController#usersList(int, int, String, String, Model)
+2025-08-19 11:38:13 [http-nio-8080-exec-3] INFO  c.J.Bank.controller.WebController - REQUEST - GET /users - Loading users list page: 0, size: 10, city: null, keyword: null
+2025-08-19 11:38:13 [http-nio-8080-exec-3] INFO  c.J.Bank.service.UserService - Fetching users with pagination - Page: 0, Size: 10, SortBy: id, SortDir: asc, City: null, Keyword: null
+2025-08-19 11:38:13 [http-nio-8080-exec-3] INFO  c.J.Bank.controller.WebController - RESPONSE - GET /users - Users list page loaded for page 0 with 10 users
+2025-08-19 11:38:13 [http-nio-8080-exec-3] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2025-08-19 11:38:13 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-08-19 11:38:40 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - GET "/users/create", parameters={}
+2025-08-19 11:38:40 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.JavaSpring.Bank.controller.WebController#createUserForm(Model)
+2025-08-19 11:38:40 [http-nio-8080-exec-4] INFO  c.J.Bank.controller.WebController - REQUEST - GET /users/create - Loading create user form
+2025-08-19 11:38:40 [http-nio-8080-exec-4] INFO  c.J.Bank.controller.WebController - RESPONSE - GET /users/create - Create user form loaded
+2025-08-19 11:38:40 [http-nio-8080-exec-4] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2025-08-19 11:38:40 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-08-19 11:38:45 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - POST "/api/v1/users", parameters={}
+2025-08-19 11:38:45 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.JavaSpring.Bank.controller.UserController#createUser(UserRequestDTO)
+2025-08-19 11:38:46 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [UserRequestDTO{firstName='Muhammad', lastName='Shamsudin', email='danialsswork@gmail.com', phone='01 (truncated)...]
+2025-08-19 11:38:46 [http-nio-8080-exec-1] INFO  c.J.Bank.controller.UserController - REQUEST - POST /v1/users - Creating user with email: danialsswork@gmail.com
+2025-08-19 11:38:46 [http-nio-8080-exec-1] INFO  c.J.Bank.service.UserService - Creating new user with email: danialsswork@gmail.com
+2025-08-19 11:38:46 [http-nio-8080-exec-1] INFO  c.J.Bank.service.UserService - User created successfully with ID: 31
+2025-08-19 11:38:46 [http-nio-8080-exec-1] INFO  c.J.Bank.controller.UserController - RESPONSE - POST /v1/users - Status: 201, User created with ID: 31
+2025-08-19 11:38:46 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-08-19 11:38:46 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [UserResponseDTO{id=31, firstName='Muhammad', lastName='Shamsudin', email='danialsswork@gmail.com', p (truncated)...]
+2025-08-19 11:38:46 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 201 CREATED
+2025-08-19 11:38:47 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - GET "/users?page=3", parameters={masked}
+2025-08-19 11:38:47 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.JavaSpring.Bank.controller.WebController#usersList(int, int, String, String, Model)
+2025-08-19 11:38:47 [http-nio-8080-exec-3] INFO  c.J.Bank.controller.WebController - REQUEST - GET /users - Loading users list page: 3, size: 10, city: null, keyword: null
+2025-08-19 11:38:47 [http-nio-8080-exec-3] INFO  c.J.Bank.service.UserService - Fetching users with pagination - Page: 3, Size: 10, SortBy: id, SortDir: asc, City: null, Keyword: null
+2025-08-19 11:38:47 [http-nio-8080-exec-3] INFO  c.J.Bank.controller.WebController - RESPONSE - GET /users - Users list page loaded for page 3 with 1 users
+2025-08-19 11:38:47 [http-nio-8080-exec-3] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2025-08-19 11:38:47 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-08-19 11:39:01 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - GET "/users/edit?id=31", parameters={masked}
+2025-08-19 11:39:01 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.JavaSpring.Bank.controller.WebController#editUserForm(Long, Model)
+2025-08-19 11:39:01 [http-nio-8080-exec-2] INFO  c.J.Bank.controller.WebController - REQUEST - GET /users/edit - Loading edit user form for ID: 31
+2025-08-19 11:39:01 [http-nio-8080-exec-2] INFO  c.J.Bank.controller.WebController - RESPONSE - GET /users/edit - Edit user form loaded for ID: 31
+2025-08-19 11:39:01 [http-nio-8080-exec-2] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2025-08-19 11:39:01 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-08-19 11:39:01 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - GET "/api/v1/users/31", parameters={}
+2025-08-19 11:39:01 [http-nio-8080-exec-9] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.JavaSpring.Bank.controller.UserController#getUserById(Long)
+2025-08-19 11:39:01 [http-nio-8080-exec-9] INFO  c.J.Bank.controller.UserController - REQUEST - GET /v1/users/31 - User ID: 31
+2025-08-19 11:39:01 [http-nio-8080-exec-9] INFO  c.J.Bank.service.UserService - Fetching user by ID: 31
+2025-08-19 11:39:01 [http-nio-8080-exec-9] INFO  c.J.Bank.controller.UserController - RESPONSE - GET /v1/users/31 - Status: 200, User found: danialsswork@gmail.com
+2025-08-19 11:39:01 [http-nio-8080-exec-9] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-08-19 11:39:01 [http-nio-8080-exec-9] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [UserResponseDTO{id=31, firstName='Muhammad', lastName='Shamsudin', email='danialsswork@gmail.com', p (truncated)...]
+2025-08-19 11:39:01 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-08-19 11:39:09 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - GET "/api/v1/users/31", parameters={}
+2025-08-19 11:39:09 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.JavaSpring.Bank.controller.UserController#getUserById(Long)
+2025-08-19 11:39:09 [http-nio-8080-exec-7] INFO  c.J.Bank.controller.UserController - REQUEST - GET /v1/users/31 - User ID: 31
+2025-08-19 11:39:09 [http-nio-8080-exec-7] INFO  c.J.Bank.service.UserService - Fetching user by ID: 31
+2025-08-19 11:39:09 [http-nio-8080-exec-7] INFO  c.J.Bank.controller.UserController - RESPONSE - GET /v1/users/31 - Status: 200, User found: danialsswork@gmail.com
+2025-08-19 11:39:09 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json;q=0.8', given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7] and supported [application/json, application/*+json]
+2025-08-19 11:39:09 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [UserResponseDTO{id=31, firstName='Muhammad', lastName='Shamsudin', email='danialsswork@gmail.com', p (truncated)...]
+2025-08-19 11:39:09 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-08-19 11:39:13 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - PUT "/api/v1/users/31", parameters={}
+2025-08-19 11:39:13 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.JavaSpring.Bank.controller.UserController#updateUser(Long, UserRequestDTO)
+2025-08-19 11:39:13 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [UserRequestDTO{firstName='Muhammad', lastName='Shamsudin', email='danialsswork@gmail.com', phone='01 (truncated)...]
+2025-08-19 11:39:13 [http-nio-8080-exec-6] INFO  c.J.Bank.controller.UserController - REQUEST - PUT /v1/users/31 - Updating user with email: danialsswork@gmail.com
+2025-08-19 11:39:13 [http-nio-8080-exec-6] INFO  c.J.Bank.service.UserService - Updating user with ID: 31
+2025-08-19 11:39:13 [http-nio-8080-exec-6] INFO  c.J.Bank.service.UserService - User updated successfully with ID: 31
+2025-08-19 11:39:13 [http-nio-8080-exec-6] INFO  c.J.Bank.controller.UserController - RESPONSE - PUT /v1/users/31 - Status: 200, User updated
+2025-08-19 11:39:13 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-08-19 11:39:13 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [UserResponseDTO{id=31, firstName='Muhammad', lastName='Shamsudin', email='danialsswork@gmail.com', p (truncated)...]
+2025-08-19 11:39:13 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-08-19 11:39:17 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - GET "/users", parameters={}
+2025-08-19 11:39:17 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.JavaSpring.Bank.controller.WebController#usersList(int, int, String, String, Model)
+2025-08-19 11:39:17 [http-nio-8080-exec-4] INFO  c.J.Bank.controller.WebController - REQUEST - GET /users - Loading users list page: 0, size: 10, city: null, keyword: null
+2025-08-19 11:39:17 [http-nio-8080-exec-4] INFO  c.J.Bank.service.UserService - Fetching users with pagination - Page: 0, Size: 10, SortBy: id, SortDir: asc, City: null, Keyword: null
+2025-08-19 11:39:17 [http-nio-8080-exec-4] INFO  c.J.Bank.controller.WebController - RESPONSE - GET /users - Users list page loaded for page 0 with 10 users
+2025-08-19 11:39:17 [http-nio-8080-exec-4] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2025-08-19 11:39:17 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-08-19 11:39:21 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET "/users?page=1&size=10&city=&keyword=", parameters={masked}
+2025-08-19 11:39:21 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.JavaSpring.Bank.controller.WebController#usersList(int, int, String, String, Model)
+2025-08-19 11:39:21 [http-nio-8080-exec-1] INFO  c.J.Bank.controller.WebController - REQUEST - GET /users - Loading users list page: 1, size: 10, city: , keyword: 
+2025-08-19 11:39:21 [http-nio-8080-exec-1] INFO  c.J.Bank.service.UserService - Fetching users with pagination - Page: 1, Size: 10, SortBy: id, SortDir: asc, City: , Keyword: 
+2025-08-19 11:39:21 [http-nio-8080-exec-1] INFO  c.J.Bank.controller.WebController - RESPONSE - GET /users - Users list page loaded for page 1 with 0 users
+2025-08-19 11:39:21 [http-nio-8080-exec-1] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2025-08-19 11:39:21 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-08-19 11:39:32 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - GET "/users?keyword=Muhammad&city=&size=10", parameters={masked}
+2025-08-19 11:39:32 [http-nio-8080-exec-9] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.JavaSpring.Bank.controller.WebController#usersList(int, int, String, String, Model)
+2025-08-19 11:39:32 [http-nio-8080-exec-9] INFO  c.J.Bank.controller.WebController - REQUEST - GET /users - Loading users list page: 0, size: 10, city: , keyword: Muhammad
+2025-08-19 11:39:32 [http-nio-8080-exec-9] INFO  c.J.Bank.service.UserService - Fetching users with pagination - Page: 0, Size: 10, SortBy: id, SortDir: asc, City: , Keyword: Muhammad
+2025-08-19 11:39:32 [http-nio-8080-exec-9] INFO  c.J.Bank.controller.WebController - RESPONSE - GET /users - Users list page loaded for page 0 with 0 users
+2025-08-19 11:39:32 [http-nio-8080-exec-9] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2025-08-19 11:39:32 [http-nio-8080-exec-9] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-08-19 11:39:35 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - GET "/users?keyword=Muhammad&city=&size=10", parameters={masked}
+2025-08-19 11:39:35 [http-nio-8080-exec-7] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.JavaSpring.Bank.controller.WebController#usersList(int, int, String, String, Model)
+2025-08-19 11:39:35 [http-nio-8080-exec-7] INFO  c.J.Bank.controller.WebController - REQUEST - GET /users - Loading users list page: 0, size: 10, city: , keyword: Muhammad
+2025-08-19 11:39:35 [http-nio-8080-exec-7] INFO  c.J.Bank.service.UserService - Fetching users with pagination - Page: 0, Size: 10, SortBy: id, SortDir: asc, City: , Keyword: Muhammad
+2025-08-19 11:39:35 [http-nio-8080-exec-7] INFO  c.J.Bank.controller.WebController - RESPONSE - GET /users - Users list page loaded for page 0 with 0 users
+2025-08-19 11:39:35 [http-nio-8080-exec-7] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2025-08-19 11:39:35 [http-nio-8080-exec-7] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-08-19 11:39:35 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - GET "/users?keyword=Muhammad&city=&size=10", parameters={masked}
+2025-08-19 11:39:35 [http-nio-8080-exec-6] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.JavaSpring.Bank.controller.WebController#usersList(int, int, String, String, Model)
+2025-08-19 11:39:35 [http-nio-8080-exec-6] INFO  c.J.Bank.controller.WebController - REQUEST - GET /users - Loading users list page: 0, size: 10, city: , keyword: Muhammad
+2025-08-19 11:39:35 [http-nio-8080-exec-6] INFO  c.J.Bank.service.UserService - Fetching users with pagination - Page: 0, Size: 10, SortBy: id, SortDir: asc, City: , Keyword: Muhammad
+2025-08-19 11:39:35 [http-nio-8080-exec-6] INFO  c.J.Bank.controller.WebController - RESPONSE - GET /users - Users list page loaded for page 0 with 0 users
+2025-08-19 11:39:35 [http-nio-8080-exec-6] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2025-08-19 11:39:35 [http-nio-8080-exec-6] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-08-19 11:39:36 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - GET "/users?keyword=Muhammad&city=&size=10", parameters={masked}
+2025-08-19 11:39:36 [http-nio-8080-exec-4] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.JavaSpring.Bank.controller.WebController#usersList(int, int, String, String, Model)
+2025-08-19 11:39:36 [http-nio-8080-exec-4] INFO  c.J.Bank.controller.WebController - REQUEST - GET /users - Loading users list page: 0, size: 10, city: , keyword: Muhammad
+2025-08-19 11:39:36 [http-nio-8080-exec-4] INFO  c.J.Bank.service.UserService - Fetching users with pagination - Page: 0, Size: 10, SortBy: id, SortDir: asc, City: , Keyword: Muhammad
+2025-08-19 11:39:36 [http-nio-8080-exec-4] INFO  c.J.Bank.controller.WebController - RESPONSE - GET /users - Users list page loaded for page 0 with 0 users
+2025-08-19 11:39:36 [http-nio-8080-exec-4] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2025-08-19 11:39:36 [http-nio-8080-exec-4] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-08-19 11:39:37 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - GET "/users?keyword=Muhammad&city=&size=10", parameters={masked}
+2025-08-19 11:39:37 [http-nio-8080-exec-1] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.JavaSpring.Bank.controller.WebController#usersList(int, int, String, String, Model)
+2025-08-19 11:39:37 [http-nio-8080-exec-1] INFO  c.J.Bank.controller.WebController - REQUEST - GET /users - Loading users list page: 0, size: 10, city: , keyword: Muhammad
+2025-08-19 11:39:37 [http-nio-8080-exec-1] INFO  c.J.Bank.service.UserService - Fetching users with pagination - Page: 0, Size: 10, SortBy: id, SortDir: asc, City: , Keyword: Muhammad
+2025-08-19 11:39:37 [http-nio-8080-exec-1] INFO  c.J.Bank.controller.WebController - RESPONSE - GET /users - Users list page loaded for page 0 with 0 users
+2025-08-19 11:39:37 [http-nio-8080-exec-1] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2025-08-19 11:39:37 [http-nio-8080-exec-1] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-08-19 11:39:38 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - GET "/users?keyword=Muhammad&city=&size=10", parameters={masked}
+2025-08-19 11:39:38 [http-nio-8080-exec-3] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.JavaSpring.Bank.controller.WebController#usersList(int, int, String, String, Model)
+2025-08-19 11:39:38 [http-nio-8080-exec-3] INFO  c.J.Bank.controller.WebController - REQUEST - GET /users - Loading users list page: 0, size: 10, city: , keyword: Muhammad
+2025-08-19 11:39:38 [http-nio-8080-exec-3] INFO  c.J.Bank.service.UserService - Fetching users with pagination - Page: 0, Size: 10, SortBy: id, SortDir: asc, City: , Keyword: Muhammad
+2025-08-19 11:39:38 [http-nio-8080-exec-3] INFO  c.J.Bank.controller.WebController - RESPONSE - GET /users - Users list page loaded for page 0 with 0 users
+2025-08-19 11:39:38 [http-nio-8080-exec-3] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2025-08-19 11:39:38 [http-nio-8080-exec-3] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-08-19 11:39:38 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - GET "/users?keyword=Muhammad&city=&size=10", parameters={masked}
+2025-08-19 11:39:38 [http-nio-8080-exec-10] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.JavaSpring.Bank.controller.WebController#usersList(int, int, String, String, Model)
+2025-08-19 11:39:38 [http-nio-8080-exec-10] INFO  c.J.Bank.controller.WebController - REQUEST - GET /users - Loading users list page: 0, size: 10, city: , keyword: Muhammad
+2025-08-19 11:39:38 [http-nio-8080-exec-10] INFO  c.J.Bank.service.UserService - Fetching users with pagination - Page: 0, Size: 10, SortBy: id, SortDir: asc, City: , Keyword: Muhammad
+2025-08-19 11:39:38 [http-nio-8080-exec-10] INFO  c.J.Bank.controller.WebController - RESPONSE - GET /users - Users list page loaded for page 0 with 0 users
+2025-08-19 11:39:38 [http-nio-8080-exec-10] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2025-08-19 11:39:38 [http-nio-8080-exec-10] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-08-19 11:39:49 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - GET "/users/create", parameters={}
+2025-08-19 11:39:49 [http-nio-8080-exec-8] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.JavaSpring.Bank.controller.WebController#createUserForm(Model)
+2025-08-19 11:39:49 [http-nio-8080-exec-8] INFO  c.J.Bank.controller.WebController - REQUEST - GET /users/create - Loading create user form
+2025-08-19 11:39:49 [http-nio-8080-exec-8] INFO  c.J.Bank.controller.WebController - RESPONSE - GET /users/create - Create user form loaded
+2025-08-19 11:39:49 [http-nio-8080-exec-8] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2025-08-19 11:39:49 [http-nio-8080-exec-8] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
+2025-08-19 11:39:53 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - POST "/api/v1/users", parameters={}
+2025-08-19 11:39:53 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.JavaSpring.Bank.controller.UserController#createUser(UserRequestDTO)
+2025-08-19 11:39:53 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.RequestResponseBodyMethodProcessor - Read "application/json;charset=UTF-8" to [UserRequestDTO{firstName='Muhammad', lastName='Shamsudin', email='danialsswork@gmail.com', phone='01 (truncated)...]
+2025-08-19 11:39:53 [http-nio-8080-exec-2] INFO  c.J.Bank.controller.UserController - REQUEST - POST /v1/users - Creating user with email: danialsswork@gmail.com
+2025-08-19 11:39:53 [http-nio-8080-exec-2] INFO  c.J.Bank.service.UserService - Creating new user with email: danialsswork@gmail.com
+2025-08-19 11:39:54 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Using @ExceptionHandler com.JavaSpring.Bank.exception.GlobalExceptionHandler#handleDuplicateResource(DuplicateResourceException)
+2025-08-19 11:39:54 [http-nio-8080-exec-2] WARN  c.J.B.e.GlobalExceptionHandler - Duplicate resource: User already exists with email: danialsswork@gmail.com
+2025-08-19 11:39:54 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Using 'application/json', given [*/*] and supported [application/json, application/*+json]
+2025-08-19 11:39:54 [http-nio-8080-exec-2] DEBUG o.s.w.s.m.m.a.HttpEntityMethodProcessor - Writing [{error=Duplicate Resource, message=User already exists with email: danialsswork@gmail.com, status=40 (truncated)...]
+2025-08-19 11:39:54 [http-nio-8080-exec-2] WARN  o.s.w.s.m.m.a.ExceptionHandlerExceptionResolver - Resolved [com.JavaSpring.Bank.exception.DuplicateResourceException: User already exists with email: danialsswork@gmail.com]
+2025-08-19 11:39:54 [http-nio-8080-exec-2] DEBUG o.s.web.servlet.DispatcherServlet - Completed 409 CONFLICT
+2025-08-19 11:39:58 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - GET "/users", parameters={}
+2025-08-19 11:39:58 [http-nio-8080-exec-5] DEBUG o.s.w.s.m.m.a.RequestMappingHandlerMapping - Mapped to com.JavaSpring.Bank.controller.WebController#usersList(int, int, String, String, Model)
+2025-08-19 11:39:58 [http-nio-8080-exec-5] INFO  c.J.Bank.controller.WebController - REQUEST - GET /users - Loading users list page: 0, size: 10, city: null, keyword: null
+2025-08-19 11:39:58 [http-nio-8080-exec-5] INFO  c.J.Bank.service.UserService - Fetching users with pagination - Page: 0, Size: 10, SortBy: id, SortDir: asc, City: null, Keyword: null
+2025-08-19 11:39:58 [http-nio-8080-exec-5] INFO  c.J.Bank.controller.WebController - RESPONSE - GET /users - Users list page loaded for page 0 with 10 users
+2025-08-19 11:39:58 [http-nio-8080-exec-5] DEBUG o.s.w.s.v.ContentNegotiatingViewResolver - Selected 'text/html' given [text/html, application/xhtml+xml, image/avif, image/webp, image/apng, application/xml;q=0.9, */*;q=0.8, application/signed-exchange;v=b3;q=0.7]
+2025-08-19 11:39:58 [http-nio-8080-exec-5] DEBUG o.s.web.servlet.DispatcherServlet - Completed 200 OK
