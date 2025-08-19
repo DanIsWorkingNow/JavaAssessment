@@ -152,6 +152,11 @@
 
         <!-- Users Grid (REAL DATABASE DATA) -->
         <div class="row">
+            //Show user Count
+            <div class="col-12 mb-3">
+        <div class="alert alert-info">
+            DEBUG: Total users from database: <span th:text="${#lists.size(users)}">0</span>
+        </div>
             <!-- Dynamic User Cards from Database -->
             <div class="col-md-6 col-lg-4 mb-3" th:each="user : ${users}">
                 <div class="user-card p-3">

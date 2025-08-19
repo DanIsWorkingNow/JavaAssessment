@@ -24,47 +24,47 @@ public class DataInitializer implements CommandLineRunner {
     private UserRepository userRepository;
     
     @Override
-    public void run(String... args) throws Exception {
-        if (userRepository.count() == 0) {
-            logger.info("Initializing database with sample users...");
-            
-            List<User> sampleUsers = Arrays.asList(
-                new User("John", "Doe", "john.doe@example.com", "+1-555-0001", "New York"),
-                new User("Jane", "Smith", "jane.smith@example.com", "+1-555-0002", "Los Angeles"),
-                new User("Michael", "Johnson", "michael.johnson@example.com", "+1-555-0003", "Chicago"),
-                new User("Emily", "Davis", "emily.davis@example.com", "+1-555-0004", "Houston"),
-                new User("David", "Wilson", "david.wilson@example.com", "+1-555-0005", "Phoenix"),
-                new User("Sarah", "Miller", "sarah.miller@example.com", "+1-555-0006", "Philadelphia"),
-                new User("James", "Brown", "james.brown@example.com", "+1-555-0007", "San Antonio"),
-                new User("Jessica", "Garcia", "jessica.garcia@example.com", "+1-555-0008", "San Diego"),
-                new User("Robert", "Rodriguez", "robert.rodriguez@example.com", "+1-555-0009", "Dallas"),
-                new User("Lisa", "Martinez", "lisa.martinez@example.com", "+1-555-0010", "San Jose"),
-                new User("William", "Anderson", "william.anderson@example.com", "+1-555-0011", "Austin"),
-                new User("Ashley", "Taylor", "ashley.taylor@example.com", "+1-555-0012", "Jacksonville"),
-                new User("Christopher", "Thomas", "christopher.thomas@example.com", "+1-555-0013", "Fort Worth"),
-                new User("Amanda", "Hernandez", "amanda.hernandez@example.com", "+1-555-0014", "Columbus"),
-                new User("Matthew", "Moore", "matthew.moore@example.com", "+1-555-0015", "Charlotte"),
-                new User("Jennifer", "Martin", "jennifer.martin@example.com", "+1-555-0016", "San Francisco"),
-                new User("Joshua", "Jackson", "joshua.jackson@example.com", "+1-555-0017", "Indianapolis"),
-                new User("Stephanie", "Thompson", "stephanie.thompson@example.com", "+1-555-0018", "Seattle"),
-                new User("Andrew", "White", "andrew.white@example.com", "+1-555-0019", "Denver"),
-                new User("Michelle", "Lopez", "michelle.lopez@example.com", "+1-555-0020", "Washington"),
-                new User("Kevin", "Lee", "kevin.lee@example.com", "+1-555-0021", "Boston"),
-                new User("Laura", "Gonzalez", "laura.gonzalez@example.com", "+1-555-0022", "El Paso"),
-                new User("Brian", "Harris", "brian.harris@example.com", "+1-555-0023", "Detroit"),
-                new User("Nicole", "Clark", "nicole.clark@example.com", "+1-555-0024", "Nashville"),
-                new User("Daniel", "Lewis", "daniel.lewis@example.com", "+1-555-0025", "Portland"),
-                new User("Melissa", "Robinson", "melissa.robinson@example.com", "+1-555-0026", "Oklahoma City"),
-                new User("Anthony", "Walker", "anthony.walker@example.com", "+1-555-0027", "Las Vegas"),
-                new User("Rebecca", "Perez", "rebecca.perez@example.com", "+1-555-0028", "Louisville"),
-                new User("Mark", "Hall", "mark.hall@example.com", "+1-555-0029", "Baltimore"),
-                new User("Kimberly", "Young", "kimberly.young@example.com", "+1-555-0030", "Milwaukee")
-            );
-            
-            userRepository.saveAll(sampleUsers);
-            logger.info("Successfully initialized database with {} sample users", sampleUsers.size());
-        } else {
-            logger.info("Database already contains {} users, skipping initialization", userRepository.count());
-        }
+public void run(String... args) throws Exception {
+    if (userRepository.count() == 0) {
+        logger.info("Initializing database with Malaysian sample users...");
+        
+        List<User> sampleUsers = Arrays.asList(
+            new User("Ahmad", "bin Abdullah", "ahmad.abdullah@company.com", "+60-12-345-6789", "Kuala Lumpur"),
+            new User("Siti", "binti Aminah", "siti.aminah@company.com", "+60-19-876-5432", "Johor Bahru"),
+            new User("Lim", "Wei Ming", "lim.weiming@company.com", "+60-16-234-5678", "Penang"),
+            new User("Priya", "Devi", "priya.devi@company.com", "+60-13-987-6543", "Ipoh"),
+            new User("Muhammad", "Farid", "muhammad.farid@company.com", "+60-17-456-7890", "Shah Alam"),
+            new User("Tan", "Ai Ling", "tan.ailing@company.com", "+60-12-789-0123", "Malacca"),
+            new User("Raj", "Kumar", "raj.kumar@company.com", "+60-19-321-6547", "Kuching"),
+            new User("Fatimah", "binti Hassan", "fatimah.hassan@company.com", "+60-16-654-3210", "Kota Kinabalu"),
+            new User("Wong", "Chee Keong", "wong.cheekeong@company.com", "+60-13-567-8901", "Seremban"),
+            new User("Nurul", "Aina", "nurul.aina@company.com", "+60-17-890-1234", "Petaling Jaya"),
+            new User("Ravi", "Shankar", "ravi.shankar@company.com", "+60-12-123-4567", "Klang"),
+            new User("Lee", "Mei Yee", "lee.meiyee@company.com", "+60-19-765-4321", "Alor Setar"),
+            new User("Azman", "bin Omar", "azman.omar@company.com", "+60-16-345-6789", "Kuantan"),
+            new User("Kavitha", "Balan", "kavitha.balan@company.com", "+60-13-876-5432", "Taiping"),
+            new User("Ong", "Boon Huat", "ong.boonhuat@company.com", "+60-17-234-5678", "Miri"),
+            new User("Zainab", "binti Yusof", "zainab.yusof@company.com", "+60-12-987-6543", "Sandakan"),
+            new User("Kumar", "Selvam", "kumar.selvam@company.com", "+60-19-456-7890", "Subang Jaya"),
+            new User("Chong", "Li Hua", "chong.lihua@company.com", "+60-16-789-0123", "Sibu"),
+            new User("Salmah", "binti Rahmat", "salmah.rahmat@company.com", "+60-13-321-6547", "Putrajaya"),
+            new User("Devi", "Krishnan", "devi.krishnan@company.com", "+60-17-654-3210", "Cyberjaya"),
+            new User("Cheah", "Wee Loon", "cheah.weeloon@company.com", "+60-12-567-8901", "Batu Pahat"),
+            new User("Halim", "bin Rashid", "halim.rashid@company.com", "+60-19-890-1234", "Tawau"),
+            new User("Meera", "Patel", "meera.patel@company.com", "+60-16-123-4567", "Ampang"),
+            new User("Yap", "Sook Cheng", "yap.sookcheng@company.com", "+60-13-765-4321", "Kajang"),
+            new User("Faizal", "bin Zulkifli", "faizal.zulkifli@company.com", "+60-17-345-6789", "Nilai"),
+            new User("Deepa", "Menon", "deepa.menon@company.com", "+60-12-876-5432", "Rawang"),
+            new User("Lau", "Kah Seng", "lau.kahseng@company.com", "+60-19-234-5678", "Bentong"),
+            new User("Rosmah", "binti Ali", "rosmah.ali@company.com", "+60-16-987-6543", "Temerloh"),
+            new User("Anand", "Krishnan", "anand.krishnan@company.com", "+60-13-456-7890", "Sepang"),
+            new User("Goh", "Swee Hock", "goh.sweehock@company.com", "+60-17-789-0123", "Puchong")
+        );
+        
+        userRepository.saveAll(sampleUsers);
+        logger.info("Successfully initialized database with {} Malaysian sample users", sampleUsers.size());
+    } else {
+        logger.info("Database already contains {} users, skipping initialization", userRepository.count());
     }
+}
 }
