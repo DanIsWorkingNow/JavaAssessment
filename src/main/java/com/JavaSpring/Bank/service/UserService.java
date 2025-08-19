@@ -26,25 +26,33 @@ public class UserService {
     private UserRepository userRepository;
     
     @Transactional(readOnly = true)
-    public Page<UserResponseDTO> getAllUsers(int page, int size, String sortBy, 
-                                           String sortDir, String city, String keyword) {
-        logger.info("Fetching users with pagination - Page: {}, Size: {}, SortBy: {}, " +
-                   "SortDir: {}, City: {}, Keyword: {}", page, size, sortBy, sortDir, city, keyword);
-        
-        Sort sort = sortDir.equalsIgnoreCase("desc") ? 
-                   Sort.by(sortBy).descending() : Sort.by(sortBy).ascending();
-        
-        Pageable pageable = PageRequest.of(page, size, sort);
-        
-        Page<User> users;
-        if (city != null || keyword != null) {
-            users = userRepository.findByCityAndKeyword(city, keyword, pageable);
-        } else {
-            users = userRepository.findAll(pageable);
-        }
-        
-        return users.map(UserResponseDTO::new);
+public Page<UserResponseDTO> getAllUsers(int page, int size, String sortBy, 
+                                       String sortDir, String city, String keyword) {
+    logger.info("Fetching users with pagination - Page: {}, Size: {}, SortBy: {}, " +
+               "SortDir: {}, City: {}, Keyword: {}", page, size, sortBy, sortDir, city, keyword);
+    
+    Sort sort = sortDir.equalsIgnoreCase("desc") ? 
+               Sort.by(sortBy).descending() : Sort.by(sortBy).ascending();
+    
+    Pageable pageable = PageRequest.of(page, size, sort);
+    
+    // CRITICAL FIX: Handle empty strings as null
+    String normalizedCity = (city != null && !city.trim().isEmpty()) ? city.trim() : null;
+    String normalizedKeyword = (keyword != null && !keyword.trim().isEmpty()) ? keyword.trim() : null;
+    
+    Page<User> users;
+    if (normalizedCity != null || normalizedKeyword != null) {
+        logger.info("Using filtered query with city: {}, keyword: {}", normalizedCity, normalizedKeyword);
+        users = userRepository.findByCityAndKeyword(normalizedCity, normalizedKeyword, pageable);
+    } else {
+        logger.info("Using findAll query for all users");
+        users = userRepository.findAll(pageable);
     }
+    
+    logger.info("Query returned {} users out of {} total", users.getNumberOfElements(), users.getTotalElements());
+    
+    return users.map(UserResponseDTO::new);
+}
     
     @Transactional(readOnly = true)
     public UserResponseDTO getUserById(Long id) {
