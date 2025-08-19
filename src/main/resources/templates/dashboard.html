@@ -84,8 +84,15 @@
                         <a class="nav-link" href="/api-docs"><i class="fas fa-code me-1"></i>API Docs</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/h2-console" target="_blank"><i class="fas fa-database me-1"></i>Database</a>
-                    </li>
+    <a class="nav-link" href="/api-explorer">
+        <i class="fas fa-flask me-1"></i>API Explorer
+    </a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="/api-docs-interactive">
+        <i class="fas fa-book me-1"></i>Interactive Docs
+    </a>
+</li>
                 </ul>
                 <span class="navbar-text">
                     <span class="status-badge">
@@ -113,7 +120,7 @@
                     <div class="row">
                         <div class="col-md-4">
                             <h5><i class="fas fa-cogs text-info me-2"></i>Version</h5>
-                            <p th:text="${version}">1.0.0</p>
+                            <p th:text="${version}">1.4.0</p>
                         </div>
                         <div class="col-md-4">
                             <h5><i class="fas fa-coffee text-warning me-2"></i>Java</h5>
@@ -129,64 +136,63 @@
         </div>
 
         <!-- Feature Cards -->
-        <div class="row">
-            <!-- User Management -->
-            <div class="col-md-6 col-lg-3 mb-4">
-                <div class="dashboard-card feature-card p-4 text-center" onclick="location.href='/users'">
-                    <div class="mb-3">
-                        <i class="fas fa-users fa-3x text-primary"></i>
-                    </div>
-                    <h5>User Management</h5>
-                    <p class="text-muted">CRUD operations with pagination (10 per page)</p>
-                    <div class="mt-auto">
-                        <span class="badge bg-primary">@Transactional</span>
-                    </div>
-                </div>
+<div class="row justify-content-center">
+    <!-- User Management -->
+    <div class="col-md-6 col-lg-3 mb-4">
+        <div class="dashboard-card feature-card p-4 text-center" onclick="location.href='/users'">
+            <div class="mb-3">
+                <i class="fas fa-users fa-3x text-primary"></i>
             </div>
-
-            <!-- API Testing -->
-            <div class="col-md-6 col-lg-3 mb-4">
-                <div class="dashboard-card feature-card p-4 text-center" onclick="testApi()">
-                    <div class="mb-3">
-                        <i class="fas fa-code fa-3x text-success"></i>
-                    </div>
-                    <h5>REST API</h5>
-                    <p class="text-muted">Test API endpoints directly from browser</p>
-                    <div class="mt-auto">
-                        <span class="badge bg-success">JSON</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Database Console -->
-            <div class="col-md-6 col-lg-3 mb-4">
-                <div class="dashboard-card feature-card p-4 text-center" onclick="window.open('/h2-console', '_blank')">
-                    <div class="mb-3">
-                        <i class="fas fa-database fa-3x text-info"></i>
-                    </div>
-                    <h5>Database Console</h5>
-                    <p class="text-muted">H2 web console for database management</p>
-                    <div class="mt-auto">
-                        <span class="badge bg-info">H2</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- External API -->
-            <div class="col-md-6 col-lg-3 mb-4">
-                <div class="dashboard-card feature-card p-4 text-center" onclick="testExternalApi()">
-                    <div class="mb-3">
-                        <i class="fas fa-globe fa-3x text-warning"></i>
-                    </div>
-                    <h5>External API</h5>
-                    <p class="text-muted">JSONPlaceholder integration for data import</p>
-                    <div class="mt-auto">
-                        <span class="badge bg-warning">Nested Calls</span>
-                    </div>
-                </div>
+            <h5>User Management</h5>
+            <p class="text-muted">CRUD operations with pagination (10 per page)</p>
+            <div class="mt-auto">
+                <span class="badge bg-primary">@Transactional</span>
             </div>
         </div>
+    </div>
 
+    <!-- API Explorer -->
+    <div class="col-md-6 col-lg-3 mb-4">
+        <div class="dashboard-card feature-card p-4 text-center" onclick="location.href='/api-explorer'">
+            <div class="mb-3">
+                <i class="fas fa-flask fa-3x text-primary"></i>
+            </div>
+            <h5>API Explorer</h5>
+            <p class="text-muted">Beautiful API testing interface with visual response viewer</p>
+            <div class="mt-auto">
+                <span class="badge bg-primary">Interactive</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Docs -->
+    <div class="col-md-6 col-lg-3 mb-4">
+        <div class="dashboard-card feature-card p-4 text-center" onclick="location.href='/api-docs-interactive'">
+            <div class="mb-3">
+                <i class="fas fa-book fa-3x text-info"></i>
+            </div>
+            <h5>Interactive Docs</h5>
+            <p class="text-muted">Swagger-like documentation with live API testing</p>
+            <div class="mt-auto">
+                <span class="badge bg-info">Swagger-like</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- API Docs -->
+    <div class="col-md-6 col-lg-3 mb-4">
+        <div class="dashboard-card feature-card p-4 text-center" onclick="location.href='/api-docs'">
+            <div class="mb-3">
+                <i class="fas fa-code fa-3x text-success"></i>
+            </div>
+            <h5>API Docs</h5>
+            <p class="text-muted">Complete API reference documentation</p>
+            <div class="mt-auto">
+                <span class="badge bg-success">Reference</span>
+            </div>
+        </div>
+    </div>
+</div>
         <!-- API Endpoints Quick Test -->
         <div class="row">
             <div class="col-12">
@@ -288,11 +294,7 @@
                                 <i class="fas fa-heartbeat me-2"></i>Health Check
                             </a>
                         </div>
-                        <div class="col-md-3">
-                            <a href="/h2-console" class="btn btn-outline-info w-100 mb-2" target="_blank">
-                                <i class="fas fa-database me-2"></i>H2 Console
-                            </a>
-                        </div>
+                        
                         <div class="col-md-3">
                             <a href="https://github.com/DanIsWorkingNow/JavaAssessment" class="btn btn-outline-dark w-100 mb-2" target="_blank">
                                 <i class="fab fa-github me-2"></i>GitHub Repo

@@ -144,4 +144,16 @@ public class WebController {
         logger.info("RESPONSE - GET /api-docs - API documentation loaded with {} endpoints", totalEndpoints);
         return "api-docs";
     }
+
+    @GetMapping("/api-explorer")
+public String apiExplorer(Model model) {
+    model.addAttribute("title", "API Explorer");
+    return "api-explorer"; // Uses the enhanced viewer
+}
+
+@GetMapping("/api-docs-interactive")
+public String interactiveDocs(Model model) {
+    model.addAttribute("title", "Interactive API Documentation");
+    return "api-docs-interactive"; // Uses the Swagger-like interface
+}
 }
