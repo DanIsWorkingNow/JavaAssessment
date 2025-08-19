@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">Edit User</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #e0eafc 0%, #a1c4fd 50%, #c2e9fb 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .form-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .loading-spinner {
+            display: none;
+        }
+        .form-section {
+            background: #f8f9fa;
+            border-radius: 8px;
+            border-left: 4px solid #007bff;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .user-id-badge {
+            background: linear-gradient(45deg, #007bff, #0056b3);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        .btn-group-custom {
+            gap: 10px;
+        }
+        .status-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        .status-loading { background-color: #ffc107; }
+        .status-success { background-color: #28a745; }
+        .status-error { background-color: #dc3545; }
+        footer {
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-users me-2"></i>Java SpringBoot Assessment
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><i class="fas fa-home me-1"></i>Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/users"><i class="fas fa-users me-1"></i>Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/api-docs"><i class="fas fa-code me-1"></i>API Docs</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/h2-console" target="_blank"><i class="fas fa-database me-1"></i>Database</a>
+                    </li>
+                </ul>
+                <span class="navbar-text">
+                    <span class="badge bg-success">
+                        <i class="fas fa-circle me-1"></i>Running
+                    </span>
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="/" class="text-decoration-none">Dashboard</a></li>
+                <li class="breadcrumb-item"><a href="/users" class="text-decoration-none">Users</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Edit User</li>
+            </ol>
+        </nav>
+
+        <div class="row justify-content-center">
+            <div class="col-md-8 col-lg-6">
+                <div class="form-card p-4">
+                    <!-- Header -->
+                    <div class="text-center mb-4">
+                        <h3 class="mb-2">
+                            <i class="fas fa-user-edit text-primary me-2"></i>
+                            Edit User
+                        </h3>
+                        <div class="user-id-badge" id="userIdBadge">
+                            <i class="fas fa-id-card me-1"></i>
+                            User ID: <span id="currentUserId" th:text="${userId}">Loading...</span>
+                        </div>
+                        <div id="loadingStatus" class="mt-2">
+                            <span class="status-indicator status-loading"></span>
+                            <small class="text-muted">Loading user data...</small>
+                        </div>
+                    </div>
+
+                    <!-- Loading Spinner -->
+                    <div id="loadingSpinner" class="loading-spinner text-center py-4">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                        <p class="mt-2 text-muted">Fetching user information...</p>
+                    </div>
+
+                    <!-- User Information Section -->
+                    <div id="userInfoSection" class="form-section" style="display: none;">
+                        <h6><i class="fas fa-info-circle text-info me-2"></i>Current User Information</h6>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <small class="text-muted">Current Name:</small>
+                                <p class="mb-1" id="currentName">-</p>
+                            </div>
+                            <div class="col-md-6">
+                                <small class="text-muted">Current Email:</small>
+                                <p class="mb-1" id="currentEmail">-</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <small class="text-muted">Current Phone:</small>
+                                <p class="mb-1" id="currentPhone">-</p>
+                            </div>
+                            <div class="col-md-6">
+                                <small class="text-muted">Current City:</small>
+                                <p class="mb-1" id="currentCity">-</p>
+                            </div>
+                        </div>
+                        <small class="text-muted">Last Updated: <span id="lastUpdated">-</span></small>
+                    </div>
+
+                    <!-- Edit Form -->
+                    <form id="editUserForm" style="display: none;">
+                        <div class="mb-3">
+                            <label for="firstName" class="form-label">
+                                <i class="fas fa-user me-1"></i>First Name *
+                            </label>
+                            <input type="text" class="form-control" id="firstName" name="firstName" required>
+                            <div class="form-text">Enter the user's first name (2-50 characters)</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="lastName" class="form-label">
+                                <i class="fas fa-user me-1"></i>Last Name *
+                            </label>
+                            <input type="text" class="form-control" id="lastName" name="lastName" required>
+                            <div class="form-text">Enter the user's last name (2-50 characters)</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="email" class="form-label">
+                                <i class="fas fa-envelope me-1"></i>Email Address *
+                            </label>
+                            <input type="email" class="form-control" id="email" name="email" required>
+                            <div class="form-text">Enter a valid email address (must be unique)</div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">
+                                <i class="fas fa-phone me-1"></i>Phone Number
+                            </label>
+                            <input type="tel" class="form-control" id="phone" name="phone" placeholder="+1-555-0123">
+                            <div class="form-text">Enter phone number (optional, max 20 characters)</div>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label for="city" class="form-label">
+                                <i class="fas fa-map-marker-alt me-1"></i>City
+                            </label>
+                            <input type="text" class="form-control" id="city" name="city" placeholder="Enter city name">
+                            <div class="form-text">Enter city name (optional, max 100 characters)</div>
+                        </div>
+                        
+                        <!-- Action Buttons -->
+                        <div class="d-flex btn-group-custom justify-content-between">
+                            <div>
+                                <button type="submit" class="btn btn-primary me-2" id="saveBtn">
+                                    <i class="fas fa-save me-1"></i>Update User
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary" onclick="resetForm()">
+                                    <i class="fas fa-undo me-1"></i>Reset
+                                </button>
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-outline-info me-2" onclick="viewUserApi()">
+                                    <i class="fas fa-eye me-1"></i>View API
+                                </button>
+                                <a href="/users" class="btn btn-secondary">
+                                    <i class="fas fa-times me-1"></i>Cancel
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Error Display -->
+                    <div id="errorDisplay" class="alert alert-danger" style="display: none;">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        <span id="errorMessage">An error occurred</span>
+                    </div>
+
+                    <!-- Success Display -->
+                    <div id="successDisplay" class="alert alert-success" style="display: none;">
+                        <i class="fas fa-check-circle me-2"></i>
+                        <span id="successMessage">User updated successfully!</span>
+                    </div>
+                </div>
+
+                <!-- API Testing Section -->
+                <div class="form-card p-4 mt-4">
+                    <h5 class="mb-3"><i class="fas fa-code text-primary me-2"></i>API Testing</h5>
+                    <p class="text-muted mb-3">Test the API endpoints related to this user:</p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <button class="btn btn-outline-primary w-100 mb-2" onclick="testGetUser()">
+                                <i class="fas fa-search me-1"></i>GET User Details
+                            </button>
+                            <button class="btn btn-outline-warning w-100 mb-2" onclick="testUpdateUser()">
+                                <i class="fas fa-edit me-1"></i>Test PUT Update
+                            </button>
+                        </div>
+                        <div class="col-md-6">
+                            <button class="btn btn-outline-danger w-100 mb-2" onclick="testDeleteUser()">
+                                <i class="fas fa-trash me-1"></i>Test DELETE User
+                            </button>
+                            <button class="btn btn-outline-info w-100 mb-2" onclick="window.open('/api-docs', '_blank')">
+                                <i class="fas fa-book me-1"></i>View API Docs
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="mt-5 py-4 text-center">
+        <div class="container">
+            <p class="mb-0">
+                <i class="fas fa-user-edit me-2"></i>
+                Edit User - Java SpringBoot Assessment
+            </p>
+            <p class="mb-0 small">
+                Demonstrating @Transactional UPDATE operations with real-time API integration
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let currentUserData = null;
+        let userId = null;
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get user ID from URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            userId = urlParams.get('id');
+            
+            if (!userId) {
+                showError('No user ID provided. Redirecting to users list...');
+                setTimeout(() => window.location.href = '/users', 2000);
+                return;
+            }
+
+            document.getElementById('currentUserId').textContent = userId;
+            loadUserData();
+        });
+
+        // Load user data from API
+        async function loadUserData() {
+            try {
+                showLoadingSpinner(true);
+                updateLoadingStatus('loading', 'Loading user data...');
+
+                const response = await fetch(`/api/v1/users/${userId}`);
+                
+                if (!response.ok) {
+                    throw new Error(`User not found (${response.status})`);
+                }
+
+                currentUserData = await response.json();
+                populateUserInfo();
+                populateForm();
+                
+                showLoadingSpinner(false);
+                updateLoadingStatus('success', 'User data loaded successfully');
+                
+                // Show form and info sections
+                document.getElementById('userInfoSection').style.display = 'block';
+                document.getElementById('editUserForm').style.display = 'block';
+
+            } catch (error) {
+                console.error('Error loading user data:', error);
+                showLoadingSpinner(false);
+                updateLoadingStatus('error', 'Failed to load user data');
+                showError('Failed to load user data: ' + error.message);
+            }
+        }
+
+        // Populate user information section
+        function populateUserInfo() {
+            if (!currentUserData) return;
+
+            document.getElementById('currentName').textContent = 
+                `${currentUserData.firstName} ${currentUserData.lastName}`;
+            document.getElementById('currentEmail').textContent = currentUserData.email || '-';
+            document.getElementById('currentPhone').textContent = currentUserData.phone || '-';
+            document.getElementById('currentCity').textContent = currentUserData.city || '-';
+            
+            if (currentUserData.updatedAt) {
+                const updatedDate = new Date(currentUserData.updatedAt);
+                document.getElementById('lastUpdated').textContent = 
+                    updatedDate.toLocaleDateString() + ' ' + updatedDate.toLocaleTimeString();
+            }
+        }
+
+        // Populate form with current user data
+        function populateForm() {
+            if (!currentUserData) return;
+
+            document.getElementById('firstName').value = currentUserData.firstName || '';
+            document.getElementById('lastName').value = currentUserData.lastName || '';
+            document.getElementById('email').value = currentUserData.email || '';
+            document.getElementById('phone').value = currentUserData.phone || '';
+            document.getElementById('city').value = currentUserData.city || '';
+        }
+
+        // Handle form submission
+        document.getElementById('editUserForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            const userData = Object.fromEntries(formData);
+            
+            // Validation
+            if (!userData.firstName.trim() || !userData.lastName.trim() || !userData.email.trim()) {
+                showError('First name, last name, and email are required.');
+                return;
+            }
+
+            try {
+                hideMessages();
+                
+                // Disable save button
+                const saveBtn = document.getElementById('saveBtn');
+                const originalText = saveBtn.innerHTML;
+                saveBtn.disabled = true;
+                saveBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i>Updating...';
+
+                const response = await fetch(`/api/v1/users/${userId}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(userData)
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    currentUserData = result;
+                    populateUserInfo();
+                    showSuccess('User updated successfully!');
+                    
+                    // Optional: redirect after success
+                    setTimeout(() => {
+                        if (confirm('User updated successfully! Do you want to return to the users list?')) {
+                            window.location.href = '/users';
+                        }
+                    }, 1500);
+                } else {
+                    throw new Error(result.message || 'Failed to update user');
+                }
+
+            } catch (error) {
+                console.error('Error updating user:', error);
+                showError('Failed to update user: ' + error.message);
+            } finally {
+                // Re-enable save button
+                const saveBtn = document.getElementById('saveBtn');
+                saveBtn.disabled = false;
+                saveBtn.innerHTML = '<i class="fas fa-save me-1"></i>Update User';
+            }
+        });
+
+        // Utility functions
+        function showLoadingSpinner(show) {
+            document.getElementById('loadingSpinner').style.display = show ? 'block' : 'none';
+        }
+
+        function updateLoadingStatus(type, message) {
+            const statusElement = document.getElementById('loadingStatus');
+            const indicator = statusElement.querySelector('.status-indicator');
+            const text = statusElement.querySelector('small');
+            
+            indicator.className = `status-indicator status-${type}`;
+            text.textContent = message;
+        }
+
+        function showError(message) {
+            const errorDisplay = document.getElementById('errorDisplay');
+            document.getElementById('errorMessage').textContent = message;
+            errorDisplay.style.display = 'block';
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => errorDisplay.style.display = 'none', 5000);
+        }
+
+        function showSuccess(message) {
+            const successDisplay = document.getElementById('successDisplay');
+            document.getElementById('successMessage').textContent = message;
+            successDisplay.style.display = 'block';
+            
+            // Auto-hide after 3 seconds
+            setTimeout(() => successDisplay.style.display = 'none', 3000);
+        }
+
+        function hideMessages() {
+            document.getElementById('errorDisplay').style.display = 'none';
+            document.getElementById('successDisplay').style.display = 'none';
+        }
+
+        function resetForm() {
+            if (confirm('Are you sure you want to reset the form to the original values?')) {
+                populateForm();
+                hideMessages();
+            }
+        }
+
+        function viewUserApi() {
+            window.open(`/api/v1/users/${userId}`, '_blank');
+        }
+
+        // API Testing Functions
+        function testGetUser() {
+            window.open(`/api/v1/users/${userId}`, '_blank');
+        }
+
+        function testUpdateUser() {
+            const userData = {
+                firstName: "Test",
+                lastName: "Update",
+                email: `test.update.${userId}@example.com`,
+                phone: "+1-555-TEST",
+                city: "Test City"
+            };
+
+            fetch(`/api/v1/users/${userId}`, {
+                method: 'PUT',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(userData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                alert('✅ Test Update Successful!\n\n' + JSON.stringify(data, null, 2));
+                // Reload current data
+                loadUserData();
+            })
+            .catch(error => {
+                alert('❌ Test Update Failed: ' + error.message);
+            });
+        }
+
+        function testDeleteUser() {
+            if (confirm('⚠️ This will permanently delete the user! Are you sure you want to test the DELETE endpoint?')) {
+                fetch(`/api/v1/users/${userId}`, { method: 'DELETE' })
+                    .then(response => response.json())
+                    .then(data => {
+                        alert('✅ User Deleted Successfully!\n\n' + JSON.stringify(data, null, 2));
+                        // Redirect to users list since user is deleted
+                        window.location.href = '/users';
+                    })
+                    .catch(error => {
+                        alert('❌ Delete Failed: ' + error.message);
+                    });
+            }
+        }
+    </script>
+</body>
+</html>

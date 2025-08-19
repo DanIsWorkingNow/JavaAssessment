@@ -24,10 +24,9 @@ public class UserRequestDTO {
     @Size(max = 100, message = "City name cannot exceed 100 characters")
     private String city;
     
-    // Default constructor
+    // Constructors
     public UserRequestDTO() {}
     
-    // Constructor with all fields
     public UserRequestDTO(String firstName, String lastName, String email, String phone, String city) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -51,4 +50,15 @@ public class UserRequestDTO {
     
     public String getCity() { return city; }
     public void setCity(String city) { this.city = city; }
+    
+    @Override
+    public String toString() {
+        return "UserRequestDTO{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", city='" + city + '\'' +
+                '}';
+    }
 }
