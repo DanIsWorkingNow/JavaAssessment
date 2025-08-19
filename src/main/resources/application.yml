@@ -3,11 +3,13 @@ spring:
     name: User-Management-System
   
   profiles:
-    active: prod  # CHANGED: was 'dev', now 'prod' for SQL Server
+    active: prod
 
-  # SQL SERVER CONFIGURATION - ADDED
+  # SQL SERVER CONFIGURATION - FIXED: Direct port + SQL Authentication
   datasource:
-    url: jdbc:sqlserver://localhost\\SQLEXPRESS;databaseName=TESTDB;encrypt=true;trustServerCertificate=true;integratedSecurity=true
+    url: jdbc:sqlserver://localhost:1433;databaseName=TESTDB;encrypt=true;trustServerCertificate=true
+    username: sa
+    password: Admin123!  # Admin123!
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     hikari:
       maximum-pool-size: 20
@@ -21,13 +23,13 @@ spring:
     show-sql: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.SQLServerDialect  # CHANGED: was H2Dialect
+        dialect: org.hibernate.dialect.SQLServerDialect
         format_sql: true
-    database-platform: org.hibernate.dialect.SQLServerDialect  # CHANGED: was H2Dialect
+    # Removed database-platform to eliminate deprecation warning
 
   h2:
     console:
-      enabled: false  # CHANGED: was true, now false (disable H2)
+      enabled: false
   
   thymeleaf:
     cache: false
@@ -41,7 +43,7 @@ spring:
       cache:
         period: 0
 
-# Logging configuration - KEEP AS IS
+# Logging configuration
 logging:
   level:
     com.JavaSpring.Bank: DEBUG
@@ -56,14 +58,14 @@ logging:
     max-size: 10MB
     max-history: 10
 
-# External API configuration - KEEP AS IS
+# External API configuration
 external:
   api:
     jsonplaceholder:
       base-url: https://jsonplaceholder.typicode.com
       timeout: 5000
 
-# Management endpoints - KEEP AS IS
+# Management endpoints
 management:
   endpoints:
     web:
